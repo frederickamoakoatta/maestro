@@ -13,6 +13,16 @@ html {
   zoom: var(--maestro-ui-scale);
 }
 
+@media (max-width: 991px) {
+  :root {
+    --maestro-ui-scale: 1;
+  }
+
+  html {
+    zoom: 1;
+  }
+}
+
 body {
   font-family: var(--body-font);
   font-size: calc(16px / var(--maestro-ui-scale));
@@ -60,6 +70,30 @@ h6,
   white-space: nowrap;
   font-size: clamp(2rem, 4.2vw, 4.5rem) !important;
   line-height: 1.1;
+}
+
+@media (max-width: 991px) {
+  .banner-four-area,
+  .banner-four-wrapper,
+  .banner-four-area .banner-four-active,
+  .banner-four-area .banner-four-active .swiper-wrapper,
+  .banner-four-area .banner-four-active .swiper-slide,
+  .banner-four-height {
+    min-height: 100svh;
+    height: auto;
+  }
+
+  .banner-four-height {
+    min-height: 100svh;
+    padding-top: 6.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .banner-four-title {
+    white-space: normal;
+    font-size: clamp(1.7rem, 8.2vw, 2.55rem) !important;
+    line-height: 1.15;
+  }
 }
 
 /* Hero bg zoom — template-style Ken Burns on active slide */

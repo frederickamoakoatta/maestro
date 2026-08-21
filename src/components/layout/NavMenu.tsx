@@ -80,25 +80,35 @@ interface MobileMenuProps {
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
   return (
-    <div
-      className={`mobile-menu d-lg-none d-block scroll-sm position-fixed bg-white tw-w-300-px tw-h-screen overflow-y-auto tw-p-6 tw-z-999 tw-pb-68 ${open ? 'active' : ''}`}
-    >
-      <button
-        type="button"
-        className="close-button position-absolute tw-end-0 top-0 tw-me-2 tw-mt-2 tw-w-605 tw-h-605 rounded-circle d-flex justify-content-center align-items-center text-main-two-600 bg-neutral-200 hover-bg-main-two-600 hover-text-white"
+    <>
+      <div
+        className={`maestro-mobile-overlay d-lg-none${open ? ' is-open' : ''}`}
         onClick={onClose}
+        aria-hidden={!open}
+      />
+      <nav
+        className={`mobile-menu d-lg-none d-block scroll-sm position-fixed bg-white tw-w-300-px tw-h-screen overflow-y-auto tw-p-6 tw-z-999 tw-pb-68 ${open ? 'active' : ''}`}
+        aria-label="Mobile"
+        aria-hidden={!open}
       >
-        <Icon name="x" />
-      </button>
+        <button
+          type="button"
+          className="close-button position-absolute tw-end-0 top-0 tw-me-2 tw-mt-2 tw-w-605 tw-h-605 rounded-circle d-flex justify-content-center align-items-center text-main-two-600 bg-neutral-200 hover-bg-main-two-600 hover-text-white"
+          onClick={onClose}
+          aria-label="Close menu"
+        >
+          <Icon name="x" />
+        </button>
 
-      <div className="mobile-menu__inner">
-        <Link to="/" className="mobile-menu__logo d-block tw-mb-6" onClick={onClose}>
-          <img src={MAESTRO_LOGO} alt="Maestro" style={{ height: 36 }} />
-        </Link>
-        <div className="mobile-menu__menu">
-          <NavMenu mobile onNavigate={onClose} />
+        <div className="mobile-menu__inner">
+          <Link to="/" className="mobile-menu__logo d-block tw-mb-6" onClick={onClose}>
+            <img src={MAESTRO_LOGO} alt="Maestro" style={{ height: 36 }} />
+          </Link>
+          <div className="mobile-menu__menu">
+            <NavMenu mobile onNavigate={onClose} />
+          </div>
         </div>
-      </div>
-    </div>
+      </nav>
+    </>
   )
 }

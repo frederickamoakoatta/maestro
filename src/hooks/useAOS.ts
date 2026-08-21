@@ -25,7 +25,9 @@ export function useAOS() {
       },
       {
         threshold: 0.08,
-        rootMargin: '0px 0px 22% 0px',
+        rootMargin: window.matchMedia('(max-width: 991px)').matches
+          ? '0px 0px 6% 0px'
+          : '0px 0px 22% 0px',
       },
     )
 

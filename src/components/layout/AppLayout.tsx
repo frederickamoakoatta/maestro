@@ -41,6 +41,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         <HeaderTopThree />
         <HeaderThree
           isScrolled={isHeaderFixed}
+          isMobileMenuOpen={mobileOpen}
           onToggleMobileMenu={toggleMobile}
           onToggleOffcanvas={toggleOffcanvas}
         />

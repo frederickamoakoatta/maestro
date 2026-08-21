@@ -1,0 +1,307 @@
+/**
+ * Mobile / tablet layout — keeps the desktop zoom scale off small screens
+ * and prevents overflow from the template utilities.
+ */
+
+@media (max-width: 991px) {
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    height: auto;
+  }
+
+  .cursor,
+  .dot {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────────────── */
+
+  .maestro-header-logo {
+    padding-inline: 0.85rem !important;
+    clip-path: none;
+  }
+
+  .maestro-header-logo img {
+    height: 32px;
+    max-width: 148px;
+  }
+
+  .maestro-header-nav-main {
+    padding-inline-end: 0.35rem !important;
+    gap: 0.35rem !important;
+  }
+
+  .toggle-mobileMenu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    font-size: 1.65rem;
+  }
+
+  .offcanvas-bar-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+
+  .offcanvas-bar-icon img {
+    width: 1.35rem;
+    height: auto;
+  }
+
+  /* ── Mobile drawer ──────────────────────────────────────────────────── */
+
+  .maestro-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    width: 100%;
+    height: 100dvh;
+    background: rgba(5, 9, 18, 0.58);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .maestro-mobile-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-menu {
+    top: 0;
+    left: 0;
+    width: min(22rem, 88vw) !important;
+    height: 100dvh !important;
+    max-height: 100dvh;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-105%);
+    transition:
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0.35s ease;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 12px 0 40px rgba(5, 9, 18, 0.18);
+  }
+
+  .mobile-menu.active {
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  /* ── Hero ───────────────────────────────────────────────────────────── */
+
+  .banner-four-paragraph {
+    max-width: none !important;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .banner-four-btn-box {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    row-gap: 0.85rem !important;
+    column-gap: 1rem;
+  }
+
+  .banner-four-arrow-box button {
+    display: inline-flex !important;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1rem;
+    left: auto;
+    right: 1rem;
+    top: auto;
+    bottom: 1.5rem;
+    transform: none;
+  }
+
+  .banner-four-arrow-box button.banner-slider-next {
+    margin-top: 0;
+    right: 1rem;
+    bottom: 1.5rem;
+  }
+
+  .banner-four-arrow-box button.banner-slider-prev {
+    right: 4.5rem;
+    bottom: 1.5rem;
+  }
+
+  /* ── Sections ───────────────────────────────────────────────────────── */
+
+  .tw-mb-15 {
+    margin-bottom: 2.25rem !important;
+  }
+
+  .maestro-app-showcase {
+    min-height: 0;
+    padding: 0.5rem 0 1.5rem;
+  }
+
+  .maestro-app-showcase__phone {
+    width: clamp(5.5rem, 28vw, 8.5rem);
+    right: 0;
+  }
+
+  .maestro-logistics-visual {
+    min-height: 14rem;
+    padding-inline: 0;
+  }
+
+  .maestro-logistics-visual__phone {
+    width: min(58%, 11.5rem);
+  }
+
+  .maestro-logistics-visual__card {
+    left: 0;
+    top: 12%;
+    min-width: 0;
+    max-width: calc(100% - 4.5rem);
+  }
+
+  .maestro-capabilities-tabs__btn {
+    flex: 1 1 100%;
+  }
+
+  .maestro-capabilities-collage {
+    gap: 0.65rem;
+  }
+
+  .maestro-capabilities-collage__hero {
+    min-height: 14rem;
+  }
+
+  .maestro-capabilities-collage__tile,
+  .maestro-capabilities-collage__tile--tall {
+    min-height: 11rem;
+  }
+
+  .maestro-industry-card {
+    width: min(18.5rem, 78vw);
+    min-height: 0;
+  }
+
+  .maestro-process__item {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  .maestro-process__truck {
+    display: none;
+  }
+
+  .maestro-cta-panel {
+    padding: 1.5rem 1.15rem;
+  }
+
+  /* ── Inner pages ────────────────────────────────────────────────────── */
+
+  .maestro-footer__contact-item,
+  .maestro-contact-card__value,
+  .maestro-offcanvas__contact {
+    overflow-wrap: anywhere;
+  }
+
+  .maestro-page-header {
+    min-height: 16rem;
+    padding-top: 6.25rem;
+    padding-bottom: 2rem;
+  }
+
+  .maestro-page-header__title {
+    max-width: none;
+    font-size: clamp(1.7rem, 7vw, 2.35rem);
+  }
+
+  .maestro-contact-map {
+    height: min(18rem, 50vh);
+  }
+
+  /* ── Footer / chrome ────────────────────────────────────────────────── */
+
+  .maestro-footer__logo img {
+    width: 148px;
+  }
+
+  .maestro-footer__bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .maestro-offcanvas,
+  .maestro-offcanvas-overlay,
+  .maestro-preloader {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  .maestro-offcanvas {
+    width: min(26.5rem, 100%);
+    padding: 1.35rem 1.15rem 1.25rem;
+  }
+
+  .progress-wrap {
+    inset-inline-end: max(1rem, env(safe-area-inset-right));
+    inset-block-end: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 575px) {
+  .container,
+  .tw-container-1760-px,
+  .tw-container-1554-px {
+    padding-inline: 1rem;
+  }
+
+  .banner-four-height {
+    padding-top: 5.75rem;
+    padding-bottom: 4.75rem;
+  }
+
+  .maestro-capabilities-collage {
+    grid-template-columns: 1fr;
+  }
+
+  .maestro-capabilities-collage__hero {
+    min-height: 12rem;
+  }
+
+  .maestro-logistics-banner {
+    padding: 1.1rem 1.15rem;
+  }
+
+  .maestro-footer__newsletter-btn {
+    width: 100%;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor,
+  .dot {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}

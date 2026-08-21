@@ -6,11 +6,12 @@ import { NavMenu } from './NavMenu'
 
 interface HeaderThreeProps {
   isScrolled: boolean
+  isMobileMenuOpen?: boolean
   onToggleMobileMenu: () => void
   onToggleOffcanvas: () => void
 }
 
-export function HeaderThree({ isScrolled, onToggleMobileMenu, onToggleOffcanvas }: HeaderThreeProps) {
+export function HeaderThree({ isScrolled, isMobileMenuOpen = false, onToggleMobileMenu, onToggleOffcanvas }: HeaderThreeProps) {
   return (
     <header className={`transition-all maestro-header links-white${isScrolled ? ' maestro-header--scrolled' : ''}`}>
       <nav
@@ -34,6 +35,7 @@ export function HeaderThree({ isScrolled, onToggleMobileMenu, onToggleOffcanvas 
                 type="button"
                 className="offcanvas-bar-icon cursor-small hover--translate-y-1 active--translate-y-05 tw-duration-150 xs-d-block d-none border-0 bg-transparent"
                 onClick={onToggleOffcanvas}
+                aria-label="Open contact panel"
               >
                 <img src={asset('images/icons/bars-two.svg')} alt="" />
               </button>
@@ -42,6 +44,8 @@ export function HeaderThree({ isScrolled, onToggleMobileMenu, onToggleOffcanvas 
                 type="button"
                 className="toggle-mobileMenu leading-none d-lg-none text-white tw-text-9 border-0 bg-transparent"
                 onClick={onToggleMobileMenu}
+                aria-label="Open menu"
+                aria-expanded={isMobileMenuOpen}
               >
                 <Icon name="list" />
               </button>
