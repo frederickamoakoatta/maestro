@@ -1,0 +1,116 @@
+/**
+ * Global UI scale — render everything at 90% (10% smaller).
+ * Uses zoom so rem, px utilities, spacing, and images all scale together.
+ */
+:root {
+  --maestro-ui-scale: 0.9;
+  --maestro-hero-bg-zoom: 1.1;
+  --heading-font: "Lexend", sans-serif;
+  --body-font: "Lato", sans-serif;
+}
+
+html {
+  zoom: var(--maestro-ui-scale);
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: calc(16px / var(--maestro-ui-scale));
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.font-heading {
+  font-family: var(--heading-font);
+}
+
+.font-body {
+  font-family: var(--body-font);
+}
+
+/* Full-viewport hero slider (compensates for ui scale so it fills the screen) */
+.banner-four-area,
+.banner-four-wrapper,
+.banner-four-area .banner-four-active,
+.banner-four-area .banner-four-active .swiper-wrapper,
+.banner-four-area .banner-four-active .swiper-slide,
+.banner-four-height {
+  min-height: calc(100svh / var(--maestro-ui-scale));
+  height: calc(100svh / var(--maestro-ui-scale));
+}
+
+.banner-four-height {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.banner-four-title {
+  white-space: nowrap;
+  font-size: clamp(2rem, 4.2vw, 4.5rem) !important;
+  line-height: 1.1;
+}
+
+/* Hero bg zoom — template-style Ken Burns on active slide */
+.banner-four-wrapper .swiper-slide:not(.swiper-slide-active) .banner-four-bg {
+  transform: scale(1);
+}
+
+.banner-four-area:not(.banner-four-area--zoom-ready) .banner-four-wrapper .swiper-slide-active .banner-four-bg {
+  transform: scale(1) !important;
+}
+
+.banner-four-area--zoom-ready .banner-four-wrapper .swiper-slide-active .banner-four-bg {
+  transform: scale(var(--maestro-hero-bg-zoom, 1.1)) !important;
+}
+
+/* Hide Swiper default nav chevrons — use template round buttons only */
+.banner-four-active .swiper-button-prev,
+.banner-four-active .swiper-button-next {
+  display: none !important;
+}
+
+/* Arrow overlay — sit above swiper so clicks reach the buttons */
+.banner-four-arrow-box {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.banner-four-arrow-box button {
+  pointer-events: auto;
+  z-index: 21;
+  background: rgba(255, 255, 255, 0.14) !important;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  color: #fff !important;
+}
+
+.banner-four-arrow-box button:hover {
+  background: hsl(var(--white)) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--maestro-primary, #ffbb02) !important;
+}
+
+.banner-four-arrow-box button .banner-four-arrow-icon {
+  width: 1em;
+  height: 1em;
+  color: inherit;
+}

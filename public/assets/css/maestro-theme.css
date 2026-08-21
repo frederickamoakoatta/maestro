@@ -1,0 +1,218 @@
+/**
+ * Maestro brand colors — overrides template red / dark blue palette.
+ *
+ * Primary:        #ffbb02
+ * Darker primary: #e5a300
+ * Black (text):   #0C090A
+ * Navy:           #1A2E46 — darker shade of #243B55 for headings, navbar, dark sections
+ * Surface dark:   #232021 — softened charcoal for sections, header, footer
+ */
+:root {
+  --maestro-primary: #ffbb02;
+  --maestro-primary-dark: #e5a300;
+  --maestro-black: #0c090a;
+  --maestro-navy: #1a2e46;
+  --maestro-surface-dark: #232021;
+
+  /* Primary (replaces template red / main) */
+  --main-h: 44;
+  --main-s: 100%;
+  --main-l: 50%;
+  --main-600: #ffbb02;
+  --main-700: #e5a300;
+  --main-800: #cc9200;
+
+  /* Dark surfaces (replaces template dark blue / main-two) */
+  --main-two-h: 345;
+  --main-two-s: 6%;
+  --main-two-l: 13%;
+  --main-two-600: var(--maestro-surface-dark);
+  --main-two-700: #1d1a1b;
+  --main-two-800: #181516;
+  --main-two-900: #131011;
+
+  /* Accent aligned with primary */
+  --main-three-h: 44;
+  --main-three-s: 100%;
+  --main-three-l: 50%;
+  --main-three-600: #ffbb02;
+
+  --green: #0c090a;
+  --heading-color: #1a2e46;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.text-main-two-600 {
+  color: var(--maestro-black) !important;
+}
+
+.text-main-600 {
+  color: var(--maestro-primary) !important;
+}
+
+/* Yellow primary surfaces — use black text for contrast */
+.btn-main,
+.btn-main .button__label {
+  color: var(--maestro-navy, #1a2e46) !important;
+}
+
+.btn-main-two {
+  background-color: var(--maestro-navy, #1a2e46) !important;
+  color: #fff !important;
+}
+
+.btn-main-two:hover,
+.btn-main-two:focus {
+  background-color: var(--maestro-primary, #ffbb02) !important;
+  color: var(--maestro-navy, #1a2e46) !important;
+}
+
+.top-header-three .bg-main-600,
+.top-header-three .bg-main-600 a {
+  color: var(--maestro-black) !important;
+}
+
+.top-header-three .bg-main-600 a:hover {
+  color: var(--maestro-black) !important;
+  opacity: 0.85;
+}
+
+span.bg-main-600.text-white {
+  color: var(--maestro-black) !important;
+}
+
+.btn-main .bg-white.text-main-600 {
+  color: var(--maestro-black) !important;
+  background-color: #fff !important;
+}
+
+.btn-main:hover .group-hover-bg-main-600 {
+  background-color: var(--maestro-black) !important;
+}
+
+.btn-main:hover .group-hover-text-white {
+  color: #fff !important;
+}
+
+.links-white .nav-menu__link {
+  color: #fff !important;
+}
+
+.links-white .nav-menu__link:hover {
+  color: var(--maestro-primary) !important;
+}
+
+.hover-text-main-600:hover {
+  color: var(--maestro-primary) !important;
+}
+
+.border-main-600 {
+  border-color: var(--maestro-primary) !important;
+}
+
+.focus-border-main-600:focus {
+  border-color: var(--maestro-primary) !important;
+}
+
+/* ── Branded page loader ──────────────────────────────────────────────── */
+
+.maestro-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100vw / var(--maestro-ui-scale, 0.9));
+  height: calc(100svh / var(--maestro-ui-scale, 0.9));
+  background: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-preloader__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 187, 2, 0.14), transparent 32%),
+    radial-gradient(circle at 80% 90%, rgba(0, 0, 0, 0.28), transparent 36%);
+}
+
+.maestro-preloader__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+}
+
+.maestro-preloader__orb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 9.25rem;
+  height: 9.25rem;
+}
+
+.maestro-preloader__orb img {
+  position: relative;
+  z-index: 1;
+  width: 6.4rem;
+  height: auto;
+  max-width: 70%;
+  object-fit: contain;
+}
+
+.maestro-preloader__ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.maestro-preloader__ring--outer {
+  inset: 0;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.12);
+  border-top-color: var(--maestro-primary, #ffbb02);
+  animation: maestro-preloader-spin 0.9s linear infinite;
+}
+
+.maestro-preloader__ring--inner {
+  inset: 12px;
+  border-width: 1.5px;
+  border-color: transparent;
+  border-bottom-color: rgba(255, 187, 2, 0.55);
+  animation: maestro-preloader-spin 1.4s linear infinite reverse;
+}
+
+.maestro-preloader__label {
+  margin: 0;
+  font-family: var(--body-font, "Lato", sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@keyframes maestro-preloader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

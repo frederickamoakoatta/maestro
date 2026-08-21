@@ -1,0 +1,471 @@
+/**
+ * Inner page header — used on every page except Home.
+ */
+
+.maestro-page-header {
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(18rem, 38vw, 24rem);
+  padding-top: 8.5rem;
+  padding-bottom: clamp(2.5rem, 5vw, 3.75rem);
+  background-color: var(--maestro-navy, #1a2e46);
+  background-image:
+    linear-gradient(180deg, rgba(5, 9, 18, 0.62) 0%, rgba(5, 9, 18, 0.82) 100%),
+    var(--maestro-page-header-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.maestro-page-header__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 30%, rgba(255, 187, 2, 0.08), transparent 28%),
+    radial-gradient(circle at 88% 70%, rgba(0, 0, 0, 0.28), transparent 36%);
+}
+
+.maestro-page-header__title {
+  margin: 0 0 0.85rem;
+  max-width: 18ch;
+  font-family: var(--heading-font, "Lexend", sans-serif);
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff !important;
+}
+
+.maestro-page-header__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: calc(14px / var(--maestro-ui-scale, 0.9));
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.maestro-page-header__crumbs a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.maestro-page-header__crumbs a:hover {
+  color: var(--maestro-primary, #ffbb02);
+}
+
+.maestro-page-header__crumbs [aria-current='page'] {
+  color: var(--maestro-primary, #ffbb02);
+}
+
+.maestro-page-header__crumbs svg {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* ── FAQ page ─────────────────────────────────────────────────────────── */
+
+.maestro-faq {
+  background: #f7f8fa;
+}
+
+.maestro-faq__intro {
+  position: sticky;
+  top: 7.5rem;
+}
+
+.maestro-faq__title {
+  margin: 0 0 1rem;
+  max-width: 14ch;
+  font-family: var(--heading-font, "Lexend", sans-serif);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--maestro-navy, #1a2e46) !important;
+}
+
+.maestro-faq__lead {
+  margin: 0 0 1.75rem;
+  max-width: 36rem;
+  font-size: calc(15px / var(--maestro-ui-scale, 0.9));
+  line-height: 1.7;
+  color: rgba(26, 46, 70, 0.7);
+}
+
+.maestro-faq__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.maestro-faq__filter {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid rgba(26, 46, 70, 0.12);
+  background: #fff;
+  color: var(--maestro-navy, #1a2e46);
+  font-size: calc(13px / var(--maestro-ui-scale, 0.9));
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.maestro-faq__filter:hover,
+.maestro-faq__filter.is-active {
+  background: var(--maestro-navy, #1a2e46);
+  border-color: var(--maestro-navy, #1a2e46);
+  color: #fff;
+}
+
+.maestro-faq__filter.is-active {
+  background: var(--maestro-primary, #ffbb02);
+  border-color: var(--maestro-primary, #ffbb02);
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.maestro-faq-item {
+  background: #fff;
+  border: 1px solid rgba(26, 46, 70, 0.08);
+  box-shadow: 0 12px 28px rgba(26, 46, 70, 0.04);
+}
+
+.maestro-faq-item.is-open {
+  border-color: rgba(255, 187, 2, 0.55);
+  box-shadow: 0 16px 36px rgba(26, 46, 70, 0.08);
+}
+
+.maestro-faq-item__heading {
+  margin: 0;
+}
+
+.maestro-faq-item__trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  padding: 1.15rem 1.25rem;
+  border: 0;
+  background: transparent;
+  text-align: start;
+}
+
+.maestro-faq-item__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  flex-shrink: 0;
+  background: rgba(255, 187, 2, 0.16);
+  color: var(--maestro-navy, #1a2e46);
+  font-family: var(--heading-font, "Lexend", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.maestro-faq-item.is-open .maestro-faq-item__index {
+  background: var(--maestro-primary, #ffbb02);
+}
+
+.maestro-faq-item__question {
+  font-family: var(--heading-font, "Lexend", sans-serif);
+  font-size: calc(16px / var(--maestro-ui-scale, 0.9));
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-faq-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(26, 46, 70, 0.12);
+  color: var(--maestro-navy, #1a2e46);
+  font-size: 0.85rem;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.maestro-faq-item.is-open .maestro-faq-item__icon {
+  background: var(--maestro-navy, #1a2e46);
+  border-color: var(--maestro-navy, #1a2e46);
+  color: #fff;
+}
+
+.maestro-faq-item__panel {
+  padding: 0 1.25rem 1.25rem 4.3rem;
+}
+
+.maestro-faq-item__answer {
+  margin: 0;
+  max-width: 42rem;
+  font-size: calc(15px / var(--maestro-ui-scale, 0.9));
+  line-height: 1.7;
+  color: rgba(26, 46, 70, 0.72);
+}
+
+@media (max-width: 991px) {
+  .maestro-faq__intro {
+    position: static;
+  }
+
+  .maestro-faq__title {
+    max-width: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .maestro-faq-item__trigger {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 1rem;
+  }
+
+  .maestro-faq-item__index {
+    display: none;
+  }
+
+  .maestro-faq-item__panel {
+    padding: 0 1rem 1.1rem;
+  }
+}
+
+/* ── Contact page ─────────────────────────────────────────────────────── */
+
+.maestro-contact {
+  background: #f7f8fa;
+}
+
+.maestro-contact__title {
+  margin: 0 0 1rem;
+  max-width: 16ch;
+  font-family: var(--heading-font, "Lexend", sans-serif);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--maestro-navy, #1a2e46) !important;
+}
+
+.maestro-contact__lead,
+.maestro-contact__intro {
+  margin: 0 0 1rem;
+  max-width: 36rem;
+  font-size: calc(15px / var(--maestro-ui-scale, 0.9));
+  line-height: 1.7;
+  color: rgba(26, 46, 70, 0.7);
+}
+
+.maestro-contact__intro {
+  margin-bottom: 0;
+}
+
+.maestro-contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  height: 100%;
+  padding: 1.4rem 1.3rem 1.3rem;
+  background: #fff;
+  border: 1px solid rgba(26, 46, 70, 0.08);
+  box-shadow: 0 12px 28px rgba(26, 46, 70, 0.04);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.maestro-contact-card:hover {
+  border-color: rgba(255, 187, 2, 0.55);
+  box-shadow: 0 16px 36px rgba(26, 46, 70, 0.08);
+  transform: translateY(-2px);
+}
+
+.maestro-contact-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.55rem;
+  background: rgba(255, 187, 2, 0.16);
+  color: var(--maestro-navy, #1a2e46);
+  font-size: 1.05rem;
+}
+
+.maestro-contact-card:hover .maestro-contact-card__icon {
+  background: var(--maestro-primary, #ffbb02);
+}
+
+.maestro-contact-card__label {
+  font-size: calc(12px / var(--maestro-ui-scale, 0.9));
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--maestro-primary, #ffbb02);
+}
+
+.maestro-contact-card__value {
+  font-family: var(--heading-font, "Lexend", sans-serif);
+  font-size: calc(15px / var(--maestro-ui-scale, 0.9));
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-contact-form {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: #fff;
+  border: 1px solid rgba(26, 46, 70, 0.08);
+  border-block-start: 4px solid var(--maestro-primary, #ffbb02);
+  box-shadow: 0 16px 40px rgba(26, 46, 70, 0.06);
+}
+
+.maestro-contact-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.15rem;
+}
+
+.maestro-contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: calc(13px / var(--maestro-ui-scale, 0.9));
+  font-weight: 700;
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-contact-form__field--full {
+  grid-column: 1 / -1;
+}
+
+.maestro-contact-form__field input,
+.maestro-contact-form__field select,
+.maestro-contact-form__field textarea {
+  width: 100%;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(26, 46, 70, 0.14);
+  background: #f7f8fa;
+  color: var(--maestro-navy, #1a2e46);
+  font-family: var(--body-font, "Lato", sans-serif);
+  font-size: calc(14px / var(--maestro-ui-scale, 0.9));
+  font-weight: 400;
+  line-height: 1.4;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.maestro-contact-form__field textarea {
+  resize: vertical;
+  min-height: 8.5rem;
+}
+
+.maestro-contact-form__field input:focus,
+.maestro-contact-form__field select:focus,
+.maestro-contact-form__field textarea:focus {
+  border-color: var(--maestro-primary, #ffbb02);
+  background: #fff;
+}
+
+.maestro-contact-form__submit,
+.maestro-contact-form__reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 0.9rem 1.4rem;
+  border: 0;
+  background: var(--maestro-navy, #1a2e46);
+  color: #fff;
+  font-weight: 700;
+  font-size: calc(14px / var(--maestro-ui-scale, 0.9));
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.maestro-contact-form__submit:hover,
+.maestro-contact-form__reset:hover {
+  background: var(--maestro-primary, #ffbb02);
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-contact-form--success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 18rem;
+  justify-content: center;
+}
+
+.maestro-contact-form__success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1rem;
+  background: var(--maestro-primary, #ffbb02);
+  color: var(--maestro-navy, #1a2e46);
+  font-size: 1.1rem;
+}
+
+.maestro-contact-form__success-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--heading-font, "Lexend", sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-contact-form__success-text {
+  margin: 0;
+  max-width: 34rem;
+  font-size: calc(15px / var(--maestro-ui-scale, 0.9));
+  line-height: 1.7;
+  color: rgba(26, 46, 70, 0.72);
+}
+
+.maestro-contact-map {
+  height: min(28rem, 58vh);
+  background: #1a2e46;
+}
+
+.maestro-contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .maestro-contact-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .maestro-contact__title {
+    max-width: none;
+  }
+}
