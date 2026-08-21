@@ -1,5 +1,4 @@
 import { howMaestroWorks } from '../../data/content/homepage/how-it-works'
-import { asset } from '../../utils/assets'
 import { Icon } from '../ui/Icon'
 import { SectionHeading } from '../ui/SectionHeading'
 
@@ -23,12 +22,6 @@ export function HowMaestroWorksSection() {
   return (
     <section className="maestro-section maestro-process py-140 position-relative overflow-hidden">
       <div className="maestro-process__map" aria-hidden="true" />
-      {/* <img
-        src={asset('apps/maestro-placeholder-02.png')}
-        alt=""
-        className="maestro-process__truck"
-        aria-hidden="true"
-      /> */}
 
       <div className="container position-relative z-1">
         <div className="max-w-840-px mx-auto text-center tw-mb-15">
