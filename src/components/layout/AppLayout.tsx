@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useAOS } from '../../hooks/useAOS'
 import { useCustomCursor } from '../../hooks/useCustomCursor'
 import { useMobileMenu } from '../../hooks/useMobileMenu'
 import { useOffcanvas } from '../../hooks/useOffcanvas'
@@ -23,6 +24,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   const { open: offcanvasOpen, toggle: toggleOffcanvas, close: closeOffcanvas } = useOffcanvas()
 
   useCustomCursor()
+  useAOS()
   const isHeaderFixed = useScrollHeader()
 
   return (

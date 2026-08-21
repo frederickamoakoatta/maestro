@@ -1,4 +1,5 @@
 import { businessOutcomes } from '../../data/content/homepage/outcomes'
+import { aosAttrs } from '../../utils/aos'
 import { asset } from '../../utils/assets'
 import { Icon } from '../ui/Icon'
 import { SectionHeading } from '../ui/SectionHeading'
@@ -11,7 +12,7 @@ export function OutcomesSection() {
     >
       <div className="maestro-outcomes__overlay" aria-hidden="true" />
       <div className="container position-relative z-1">
-        <div className="max-w-840-px mx-auto text-center tw-mb-15">
+        <div className="max-w-840-px mx-auto text-center tw-mb-15" {...aosAttrs(0)}>
           <SectionHeading
             className="maestro-section-heading--light"
             eyebrow="Business Outcomes"
@@ -24,8 +25,8 @@ export function OutcomesSection() {
         </div>
 
         <div className="row gy-4">
-          {businessOutcomes.map((outcome) => (
-            <div key={outcome.title} className="col-lg-4 col-md-6">
+          {businessOutcomes.map((outcome, index) => (
+            <div key={outcome.title} className="col-lg-4 col-md-6" {...aosAttrs(index * 80)}>
               <article className="maestro-outcome-card h-100">
                 <span className="maestro-outcome-card__icon" aria-hidden="true">
                   <Icon name={outcome.icon} weight="regular" />

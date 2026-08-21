@@ -1,4 +1,5 @@
 import { logisticsChanging } from '../../data/content/homepage/overview'
+import { aosAttrs } from '../../utils/aos'
 import { asset } from '../../utils/assets'
 import { Icon } from '../ui/Icon'
 
@@ -7,7 +8,7 @@ export function LogisticsChangingSection() {
     <section className="maestro-section maestro-logistics py-140 position-relative overflow-hidden">
       <div className="container">
         <div className="row gy-5 align-items-center tw-mb-15">
-          <div className="col-lg-6">
+          <div className="col-lg-6" {...aosAttrs(0)}>
             <span className="maestro-section-heading__eyebrow splitTextStyleTwo cursor-small tw-text-xl fw-bold fst-italic tw-mb-305 d-block">
               {logisticsChanging.eyebrow}
             </span>
@@ -18,7 +19,7 @@ export function LogisticsChangingSection() {
               <p className="maestro-logistics__lead cursor-small mb-0">{logisticsChanging.description}</p>
             )}
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-6" {...aosAttrs(140, 'fade-left')}>
             <div className="maestro-logistics-visual" aria-hidden="true">
               <img
                 src={asset('apps/maestro-placeholder-02.png')}
@@ -35,8 +36,8 @@ export function LogisticsChangingSection() {
         </div>
 
         <div className="row gy-4">
-          {logisticsChanging.items.map((item) => (
-            <div key={item.title} className="col-lg-3 col-md-6">
+          {logisticsChanging.items.map((item, index) => (
+            <div key={item.title} className="col-lg-3 col-md-6" {...aosAttrs(index * 80)}>
               <article className="maestro-expect-card h-100">
                 <span className="maestro-expect-card__icon" aria-hidden="true">
                   <Icon name={item.icon} weight="regular" />
@@ -48,7 +49,10 @@ export function LogisticsChangingSection() {
           ))}
         </div>
 
-        <div className="maestro-logistics-banner d-flex flex-column flex-md-row align-items-md-center tw-gap-5">
+        <div
+          className="maestro-logistics-banner d-flex flex-column flex-md-row align-items-md-center tw-gap-5"
+          {...aosAttrs(80)}
+        >
           <span className="maestro-logistics-banner__mark" aria-hidden="true">
             <Icon name="plugs-connected" weight="fill" />
           </span>

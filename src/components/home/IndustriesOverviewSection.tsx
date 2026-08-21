@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { industriesOverview } from '../../data/content/homepage/industries'
+import { aosAttrs } from '../../utils/aos'
 import { asset } from '../../utils/assets'
 import { Icon } from '../ui/Icon'
 import { SectionHeading } from '../ui/SectionHeading'
@@ -14,7 +15,7 @@ export function IndustriesOverviewSection() {
     >
       <div className="maestro-outcomes__overlay" aria-hidden="true" />
       <div className="container position-relative z-1">
-        <div className="max-w-840-px mx-auto text-center tw-mb-15">
+        <div className="max-w-840-px mx-auto text-center tw-mb-15" {...aosAttrs(0)}>
           <SectionHeading
             className="maestro-section-heading--light"
             eyebrow="Industries We Serve"

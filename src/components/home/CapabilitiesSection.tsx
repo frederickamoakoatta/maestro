@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { capabilityGroups } from '../../data/content/homepage/capabilities'
+import { aosAttrs } from '../../utils/aos'
 import { asset, bgStyle } from '../../utils/assets'
 import { Icon } from '../ui/Icon'
 import { SectionHeading } from '../ui/SectionHeading'
@@ -13,7 +14,7 @@ export function CapabilitiesSection() {
     <section className="maestro-section maestro-capabilities py-140">
       <div className="container">
         <div className="row gy-5 align-items-start">
-          <div className="col-lg-6">
+          <div className="col-lg-6" {...aosAttrs(0)}>
             <SectionHeading
               eyebrow="Platform Capabilities"
               title="Everything your logistics business needs"
@@ -73,7 +74,7 @@ export function CapabilitiesSection() {
             </div>
           </div>
 
-          <div className="col-lg-6">
+          <div className="col-lg-6" {...aosAttrs(160, 'fade-left')}>
             <div className="maestro-capabilities-collage">
               <div
                 className="maestro-capabilities-collage__hero"

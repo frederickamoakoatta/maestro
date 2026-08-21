@@ -2,6 +2,7 @@ import { ContactForm } from '../components/company/ContactForm'
 import { PageHeader } from '../components/layout/PageHeader'
 import { Icon } from '../components/ui/Icon'
 import { contactCards, contactPage } from '../data/content/company/contact'
+import { aosAttrs } from '../utils/aos'
 
 export function ContactPage() {
   return (
@@ -16,8 +17,8 @@ export function ContactPage() {
       <section className="maestro-contact py-140">
         <div className="container">
           <div className="row gy-4 tw-mb-15">
-            {contactCards.map((card) => (
-              <div key={card.id} className="col-md-4">
+            {contactCards.map((card, index) => (
+              <div key={card.id} className="col-md-4" {...aosAttrs(index * 80)}>
                 <a
                   href={card.href}
                   className="maestro-contact-card cursor-small"
@@ -34,7 +35,7 @@ export function ContactPage() {
           </div>
 
           <div className="row gy-5 align-items-start">
-            <div className="col-lg-5">
+            <div className="col-lg-5" {...aosAttrs(0)}>
               <span className="maestro-section-heading__eyebrow splitTextStyleTwo cursor-small tw-text-xl fw-bold fst-italic tw-mb-305 d-block">
                 {contactPage.eyebrow}
               </span>
@@ -42,7 +43,7 @@ export function ContactPage() {
               <p className="maestro-contact__lead cursor-small">{contactPage.description}</p>
               <p className="maestro-contact__intro cursor-small">{contactPage.intro}</p>
             </div>
-            <div className="col-lg-7">
+            <div className="col-lg-7" {...aosAttrs(140, 'fade-left')}>
               <ContactForm />
             </div>
           </div>

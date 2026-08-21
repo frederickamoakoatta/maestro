@@ -216,3 +216,16 @@ span.bg-main-600.text-white {
     transform: rotate(360deg);
   }
 }
+
+/* Shorter AOS travel so overflow-hidden sections don’t clip the motion */
+[data-aos='fade-up'] {
+  transform: translate3d(0, 28px, 0);
+}
+
+[data-aos='fade-left'] {
+  transform: translate3d(24px, 0, 0);
+}
+
+[data-aos='zoom-in'] {
+  transform: scale(0.96);
+}

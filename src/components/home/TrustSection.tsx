@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { softtribePartner } from '../../data/content/homepage/overview'
 import { trustPillars } from '../../data/content/homepage/trust'
+import { aosAttrs } from '../../utils/aos'
 import { Icon } from '../ui/Icon'
 import { SectionHeading } from '../ui/SectionHeading'
 
@@ -11,7 +12,7 @@ export function TrustSection() {
     <section className="maestro-section maestro-section--what-is-maestro py-140 position-relative overflow-hidden">
       <div className="container position-relative z-1">
         <div className="row gy-5 align-items-start">
-          <div className="col-lg-5">
+          <div className="col-lg-5" {...aosAttrs(0)}>
             <SectionHeading
               eyebrow="Why Organisations Trust Maestro"
               title={softtribePartner.title}
@@ -34,7 +35,7 @@ export function TrustSection() {
           <div className="col-lg-7">
             <div className="row gy-4">
               {cards.map((pillar, index) => (
-                <div key={pillar.title} className={pillar.bullets ? 'col-12' : 'col-md-6'}>
+                <div key={pillar.title} className={pillar.bullets ? 'col-12' : 'col-md-6'} {...aosAttrs(100 + index * 80)}>
                   <article className={`maestro-trust-card h-100${pillar.bullets ? ' maestro-trust-card--featured' : ''}`}>
                     <div className="maestro-trust-card__top">
                       <span className="maestro-trust-card__icon" aria-hidden="true">

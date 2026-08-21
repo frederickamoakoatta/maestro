@@ -1,4 +1,5 @@
 import { platformOverview } from '../../data/content/homepage/overview'
+import { aosAttrs } from '../../utils/aos'
 import { SectionHeading } from '../ui/SectionHeading'
 
 export function PlatformOverviewSection() {
@@ -6,7 +7,7 @@ export function PlatformOverviewSection() {
     <section className="maestro-section py-140 bg-white">
       <div className="container">
         <div className="row gy-5 align-items-center">
-          <div className="col-lg-5">
+          <div className="col-lg-5" {...aosAttrs(0)}>
             <SectionHeading
               eyebrow={platformOverview.eyebrow}
               title={platformOverview.title}
@@ -14,7 +15,7 @@ export function PlatformOverviewSection() {
               titleTag="h2"
             />
           </div>
-          <div className="col-lg-7">
+          <div className="col-lg-7" {...aosAttrs(120, 'fade-left')}>
             <div className="maestro-prose">
               {platformOverview.paragraphs?.map((paragraph) => (
                 <p key={paragraph.slice(0, 40)} className="cursor-small tw-mb-5">

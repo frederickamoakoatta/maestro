@@ -4,6 +4,7 @@ import { PageHeader } from '../components/layout/PageHeader'
 import { FaqAccordion } from '../components/resources/FaqAccordion'
 import { faqCategories, faqPage, faqs } from '../data/content/resources/faqs'
 import type { FaqCategory } from '../types'
+import { aosAttrs } from '../utils/aos'
 
 export function FaqsPage() {
   const [activeCategory, setActiveCategory] = useState<FaqCategory | 'all'>('all')
@@ -25,7 +26,7 @@ export function FaqsPage() {
       <section className="maestro-faq py-140">
         <div className="container">
           <div className="row gy-5">
-            <div className="col-lg-4">
+            <div className="col-lg-4" {...aosAttrs(0)}>
               <div className="maestro-faq__intro">
                 <span className="maestro-section-heading__eyebrow splitTextStyleTwo cursor-small tw-text-xl fw-bold fst-italic tw-mb-305 d-block">
                   {faqPage.introEyebrow}
@@ -53,7 +54,7 @@ export function FaqsPage() {
               </div>
             </div>
 
-            <div className="col-lg-8">
+            <div className="col-lg-8" {...aosAttrs(120)}>
               <FaqAccordion items={visibleFaqs} />
             </div>
           </div>

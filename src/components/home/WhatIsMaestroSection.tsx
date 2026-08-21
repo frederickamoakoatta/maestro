@@ -1,4 +1,5 @@
 import { whatIsMaestro } from '../../data/content/homepage/overview'
+import { aosAttrs } from '../../utils/aos'
 import { asset } from '../../utils/assets'
 import { SectionHeading } from '../ui/SectionHeading'
 
@@ -7,7 +8,7 @@ export function WhatIsMaestroSection() {
     <section className="maestro-section maestro-section--what-is-maestro py-140 position-relative overflow-hidden">
       <div className="container position-relative z-1">
         <div className="row gy-5 align-items-center">
-          <div className="col-lg-6">
+          <div className="col-lg-6" {...aosAttrs(0)}>
             <SectionHeading
               eyebrow={whatIsMaestro.eyebrow}
               title={whatIsMaestro.title}
@@ -23,7 +24,7 @@ export function WhatIsMaestroSection() {
               ))}
             </div>
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-6" {...aosAttrs(160, 'fade-left')}>
             <div className="maestro-app-showcase" aria-hidden="true">
               <img
                 src={asset('apps/maestro-placeholder-01.png')}

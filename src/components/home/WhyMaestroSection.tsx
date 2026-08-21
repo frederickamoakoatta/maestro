@@ -1,4 +1,5 @@
 import { whyChooseMaestro } from '../../data/content/homepage/overview'
+import { aosAttrs } from '../../utils/aos'
 import { SectionHeading } from '../ui/SectionHeading'
 
 export function WhyMaestroSection() {
@@ -6,7 +7,7 @@ export function WhyMaestroSection() {
     <section className="maestro-section py-140 bg-neutral-50">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-xl-8 text-center">
+          <div className="col-xl-8 text-center" {...aosAttrs(0)}>
             <SectionHeading
               eyebrow={whyChooseMaestro.eyebrow}
               title={whyChooseMaestro.title}

@@ -1,20 +1,39 @@
 import { useEffect } from 'react'
-import AOS from 'aos'
+import { useLocation } from 'react-router-dom'
+
+const reducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export function useAOS() {
+  const { pathname } = useLocation()
+
   useEffect(() => {
-    AOS.init({
-      duration: 1200,
-      once: true,
-      offset: 150,
-      easing: 'ease-out-cubic',
-      delay: 100,
+    const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-aos]'))
+
+    if (reducedMotion()) {
+      elements.forEach((el) => el.classList.add('aos-animate'))
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          entry.target.classList.add('aos-animate')
+          observer.unobserve(entry.target)
+        })
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px 22% 0px',
+      },
+    )
+
+    elements.forEach((el) => {
+      el.classList.remove('aos-animate')
+      observer.observe(el)
     })
 
-    const refresh = () => AOS.refresh()
-    refresh()
-    window.addEventListener('load', refresh)
-
-    return () => window.removeEventListener('load', refresh)
-  }, [])
+    return () => observer.disconnect()
+  }, [pathname])
 }

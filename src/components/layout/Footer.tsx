@@ -3,6 +3,7 @@ import { MAESTRO_LOGO_WHITE_HEADER } from '../../data/brand'
 import { siteContact } from '../../data/contact'
 import { footerColumnLayout, footerColumns } from '../../data/navigation/footer'
 import { socialLinks } from '../../data/navigation/shared'
+import { aosAttrs } from '../../utils/aos'
 import { Icon } from '../ui/Icon'
 import { FooterLinkColumn } from './FooterLinkColumn'
 
@@ -14,7 +15,7 @@ export function Footer() {
 
       <div className="container position-relative">
         <div className="maestro-footer__top row gy-4 align-items-start">
-          <div className="col-lg-5">
+          <div className="col-lg-5" {...aosAttrs(0)}>
             <div className="maestro-footer__brand">
               <Link to="/" className="maestro-footer__logo cursor-big">
                 <img src={MAESTRO_LOGO_WHITE_HEADER} alt="Maestro" />
@@ -49,7 +50,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="col-lg-7">
+          <div className="col-lg-7" {...aosAttrs(120, 'fade-left')}>
             <div className="maestro-footer__newsletter-wrap">
               <div className="maestro-footer__newsletter">
                 <div className="maestro-footer__newsletter-copy">
@@ -93,7 +94,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="maestro-footer__links row gy-5">
+        <div className="maestro-footer__links row gy-5" {...aosAttrs(80)}>
           {footerColumns.map((column) => {
             const layout = footerColumnLayout[column.id]
 
