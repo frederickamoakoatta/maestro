@@ -78,7 +78,7 @@ export const whyChooseMaestro: ContentBlock = {
 
 export const softtribePartner: ContentBlock = {
   eyebrow: 'Powered by Proven Enterprise Software',
-  title: 'Built by SOFTtribe',
+  title: 'Built by theSOFTtribe',
   paragraphs: [
     'Maestro is developed by theSOFTtribe, one of Africa’s longest-established indigenous software companies.',
     'Founded in 1991, theSOFTtribe has spent more than three decades designing, developing and supporting secure enterprise software for governments, educational institutions and private sector organisations across Africa.',

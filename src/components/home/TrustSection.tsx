@@ -5,7 +5,11 @@ import { aosAttrs } from '../../utils/aos'
 import { Icon } from '../ui/Icon'
 import { SectionHeading } from '../ui/SectionHeading'
 
-export function TrustSection() {
+interface TrustSectionProps {
+  showAboutLink?: boolean
+}
+
+export function TrustSection({ showAboutLink = true }: TrustSectionProps) {
   const cards = trustPillars.slice(1)
 
   return (
@@ -27,9 +31,11 @@ export function TrustSection() {
                 </p>
               ))}
             </div>
-            <Link to="/company/about-thesofttribe" className="maestro-inline-link cursor-small">
-              About SOFTtribe
-            </Link>
+            {showAboutLink && (
+              <Link to="/company/about-thesofttribe" className="maestro-inline-link cursor-small">
+                About theSOFTtribe
+              </Link>
+            )}
           </div>
 
           <div className="col-lg-7">

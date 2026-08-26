@@ -11,7 +11,7 @@ export const contactPage = {
     'Whether you manage a corporate fleet, operate a logistics company or build a digital logistics marketplace, Maestro provides the technology foundation to help your organisation grow with confidence.',
   headerImage: 'sliders/maestro-slider-08.jpg',
   mapEmbedUrl:
-    'https://maps.google.com/maps?q=Horizons+Offices+Airport+Accra&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    'https://maps.google.com/maps?q=Number+1+Airport+Square+Accra&t=&z=15&ie=UTF8&iwloc=&output=embed',
 }
 
 export const contactInquiryTypes = [

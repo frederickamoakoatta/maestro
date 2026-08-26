@@ -154,3 +154,25 @@ export interface FaqItem {
   answer: string
   category: FaqCategory
 }
+
+export interface CatalogSection {
+  id: string
+  title: string
+  description: string
+  icon: string
+  features?: string[]
+  benefits?: string[]
+  idealFor?: string[]
+  /** Marks copy adapted from a combined PDF block (not verbatim). */
+  adapted?: boolean
+}
+
+export interface CatalogPage {
+  id: string
+  title: string
+  eyebrow: string
+  heading: string
+  description: string
+  headerImage?: string
+  sections: CatalogSection[]
+}

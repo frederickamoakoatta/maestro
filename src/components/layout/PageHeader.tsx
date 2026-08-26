@@ -30,7 +30,7 @@ export function PageHeader({ title, backgroundImage, eyebrow, path }: PageHeader
         {path && (
           <nav className="maestro-page-header__crumbs cursor-small" aria-label="Breadcrumb">
             <Link to="/">Home</Link>
-            {section && path !== '/contact' && (
+            {section && path !== '/contact' && section !== title && (
               <>
                 <Icon name="caret-right" weight="bold" />
                 <span>{section}</span>

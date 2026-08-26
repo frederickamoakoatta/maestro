@@ -13,10 +13,11 @@ interface MegaMenuDropdownProps {
 
 export function MegaMenuDropdown({ columns, feature, mobile, open, onNavigate }: MegaMenuDropdownProps) {
   const stateClass = mobile ? (open ? 'mega-menu--mobile-open' : 'mega-menu--mobile-closed') : ''
+  const cardClass = feature ? 'mega-menu__card mega-menu__card--with-feature' : 'mega-menu__card'
 
   return (
     <div className={`mega-menu ${stateClass}`}>
-      <div className="mega-menu__card">
+      <div className={cardClass}>
         <div className="mega-menu__links">
           {columns.map((column) => (
             <div key={column.title} className="mega-menu__column">

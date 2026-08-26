@@ -67,7 +67,7 @@ export function CapabilitiesSection() {
                 Book a Demo
                 <Icon name="caret-right" weight="bold" />
               </Link>
-              <Link to="/solutions/customer-booking" className="maestro-capabilities-cta__link cursor-small">
+              <Link to="/solutions" className="maestro-capabilities-cta__link cursor-small">
                 See all features
                 <Icon name="caret-right" weight="bold" />
               </Link>

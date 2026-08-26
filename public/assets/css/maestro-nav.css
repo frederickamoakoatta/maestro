@@ -231,13 +231,18 @@
 
   .mega-menu__card {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 18rem;
-    width: min(72rem, 100%);
+    grid-template-columns: minmax(0, 1fr);
+    width: min(48rem, 100%);
     background: var(--maestro-dropdown-bg);
     border: 1px solid var(--maestro-dropdown-border);
     border-block-start: 3px solid var(--maestro-primary, #ffbb02);
     border-radius: 0;
     box-shadow: 0 20px 48px rgba(12, 9, 10, 0.12);
+  }
+
+  .mega-menu__card--with-feature {
+    grid-template-columns: minmax(0, 1fr) 18rem;
+    width: min(72rem, 100%);
   }
 }
 
