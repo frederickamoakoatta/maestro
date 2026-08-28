@@ -21,34 +21,66 @@ export function FaqChatWidget() {
   } = useFaqChat()
 
   const panelRef = useRef<HTMLDivElement>(null)
+  const isOpen = view === 'open'
 
   useEffect(() => {
-    if (view !== 'open') return
+    if (!isOpen) return
     const focusable = panelRef.current?.querySelector<HTMLElement>('textarea, button, a')
     focusable?.focus()
-  }, [view])
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const mediaQuery = window.matchMedia('(max-width: 991px)')
+    const syncScrollLock = () => {
+      document.body.style.overflow = mediaQuery.matches ? 'hidden' : ''
+    }
+
+    syncScrollLock()
+    mediaQuery.addEventListener('change', syncScrollLock)
+
+    return () => {
+      mediaQuery.removeEventListener('change', syncScrollLock)
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   return (
-    <div className="maestro-faq-chat" aria-label="FAQ assistant">
-      {view === 'open' && (
-        <div ref={panelRef}>
-          <FaqChatPanel
-            messages={messages}
-            quickReplies={quickReplies}
-            isLoading={isLoading}
-            onMinimize={minimize}
-            onClose={close}
-            onSend={sendMessage}
-            onSelectQuickReply={selectQuickReply}
-          />
-        </div>
+    <>
+      {isOpen && (
+        <button
+          type="button"
+          className="maestro-faq-chat__backdrop"
+          aria-label="Close chat"
+          onClick={minimize}
+        />
       )}
 
-      {view === 'teaser' && <FaqChatTeaser onAccept={acceptTeaser} onDismiss={dismissTeaser} />}
+      <div
+        className={`maestro-faq-chat${isOpen ? ' is-open' : ''}`}
+        aria-label="FAQ assistant"
+      >
+        {isOpen && (
+          <div ref={panelRef} className="maestro-faq-chat__panel-wrap">
+            <FaqChatPanel
+              messages={messages}
+              quickReplies={quickReplies}
+              isLoading={isLoading}
+              onMinimize={minimize}
+              onClose={close}
+              onSend={sendMessage}
+              onSelectQuickReply={selectQuickReply}
+            />
+          </div>
+        )}
 
-      {(view === 'teaser' || view === 'launcher') && (
-        <FaqChatLauncher hasUnread={hasUnread} onClick={openChat} />
-      )}
-    </div>
+        {view === 'teaser' && <FaqChatTeaser onAccept={acceptTeaser} onDismiss={dismissTeaser} />}
+
+        {(view === 'teaser' || view === 'launcher') && (
+          <FaqChatLauncher hasUnread={hasUnread} onClick={openChat} />
+        )}
+      </div>
+    </>
   )
 }

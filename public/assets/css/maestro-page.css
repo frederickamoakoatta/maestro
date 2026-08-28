@@ -1042,10 +1042,58 @@
   .maestro-careers__benefits,
   .maestro-insights__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .maestro-careers__roles-lead,
+  .maestro-careers-apply__text {
+    max-width: none;
+  }
+
+  .maestro-job-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1.15rem 1.2rem;
+  }
+
+  .maestro-job-card__cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .maestro-insights__filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: -0.25rem;
+    padding-inline: 0.25rem 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .maestro-insights__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .maestro-insights__filter {
+    flex-shrink: 0;
+  }
+
+  .maestro-careers-apply {
+    padding: 1.35rem 1.2rem;
   }
 }
 
 @media (max-width: 767px) {
+  .maestro-careers,
+  .maestro-insights,
+  .maestro-career-detail,
+  .maestro-article-detail {
+    overflow-x: clip;
+  }
+
   .maestro-careers__heading,
   .maestro-insights__heading {
     max-width: none;
@@ -1056,14 +1104,70 @@
     grid-template-columns: 1fr;
   }
 
-  .maestro-job-card {
-    flex-direction: column;
-    align-items: flex-start;
+  .maestro-careers__roles-title,
+  .maestro-article-detail__related-title {
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
   }
 
-  .maestro-job-card__cta {
+  .maestro-careers__roles-lead {
+    margin-bottom: 1rem;
+  }
+
+  .maestro-job-card {
+    padding: 1.1rem 1rem;
+  }
+
+  .maestro-job-card__meta {
+    gap: 0.5rem 0.85rem;
+  }
+
+  .maestro-job-card__meta li {
+    font-size: calc(12px / var(--maestro-ui-scale, 0.9));
+  }
+
+  .maestro-careers-apply__title {
+    font-size: 1.05rem;
+  }
+
+  .maestro-careers-apply__btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .maestro-insight-card__body {
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .maestro-insight-card__title {
+    font-size: calc(0.98rem / var(--maestro-ui-scale, 0.9));
+  }
+
+  .maestro-career-detail__content {
+    padding: 1.15rem 1rem;
+  }
+
+  .maestro-career-detail__sidebar {
+    padding: 1.25rem 1.1rem;
+  }
+
+  .maestro-career-detail__summary,
+  .maestro-career-detail__list li,
+  .maestro-article-detail__body p {
+    font-size: calc(15px / var(--maestro-ui-scale, 0.9));
+  }
+
+  .maestro-article-detail__meta {
+    gap: 0.35rem 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .maestro-article-detail__back {
+    margin-top: 1.5rem;
+  }
+
+  .maestro-article-detail__related {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
   }
 }
 
