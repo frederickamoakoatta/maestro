@@ -12,7 +12,7 @@ export function AboutMaestroPage() {
         path="/company/about-maestro"
         backgroundImage="sliders/maestro-slider-07.jpg"
       />
-      <WhatIsMaestroSection />
+      <WhatIsMaestroSection variant='light'/>
       <IndustriesOverviewSection />
       <WhyMaestroSection />
       <HomeCtaSection />

@@ -12,7 +12,9 @@ import { HeaderTopThree } from './HeaderTopThree'
 import { MobileMenu } from './NavMenu'
 import { OffcanvasSidebar } from './OffcanvasSidebar'
 import { Preloader } from './Preloader'
+import { RouteScrollRestoration } from './RouteScrollRestoration'
 import { ScrollToTop } from './ScrollToTop'
+import { FaqChatWidget } from '../faq-chat/FaqChatWidget'
 
 interface AppLayoutProps {
   children: ReactNode
@@ -29,6 +31,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <>
+      <RouteScrollRestoration />
       <Preloader visible={preloaderVisible} />
       <ScrollToTop />
       <CustomCursor />
@@ -49,6 +52,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 
       <main>{children}</main>
       <Footer />
+      <FaqChatWidget />
     </>
   )
 }

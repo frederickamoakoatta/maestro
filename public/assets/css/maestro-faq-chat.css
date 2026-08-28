@@ -1,0 +1,459 @@
+/* ── FAQ Chat Widget ─────────────────────────────────────────────────── */
+
+.maestro-faq-chat {
+  position: fixed;
+  inset-inline-end: 24px;
+  inset-block-end: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.maestro-faq-chat > * {
+  pointer-events: auto;
+}
+
+/* Launcher */
+.maestro-faq-chat__launcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--maestro-navy, #1a2e46) 0%, #243a56 100%);
+  color: var(--maestro-primary, #ffbb02);
+  box-shadow: 0 12px 32px rgba(26, 46, 70, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.maestro-faq-chat__launcher:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(26, 46, 70, 0.4);
+  background: var(--maestro-primary, #ffbb02);
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-faq-chat__launcher svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.maestro-faq-chat__badge {
+  position: absolute;
+  top: 2px;
+  inset-inline-end: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #e53935;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* Teaser */
+.maestro-faq-chat__teaser {
+  width: min(300px, calc(100vw - 48px));
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(26, 46, 70, 0.18);
+  border: 1px solid rgba(26, 46, 70, 0.08);
+  animation: maestro-faq-chat-slide-up 0.35s ease;
+}
+
+.maestro-faq-chat__teaser-text {
+  margin: 0 0 12px;
+  color: var(--maestro-navy, #1a2e46);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.maestro-faq-chat__teaser-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.maestro-faq-chat__teaser-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--maestro-navy, #1a2e46);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.maestro-faq-chat__teaser-link:hover {
+  color: var(--maestro-primary, #ffbb02);
+}
+
+/* Panel */
+.maestro-faq-chat__panel {
+  display: flex;
+  flex-direction: column;
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(560px, calc(100vh - 120px));
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f4f6f9;
+  box-shadow: 0 24px 60px rgba(26, 46, 70, 0.22);
+  animation: maestro-faq-chat-slide-up 0.35s ease;
+}
+
+/* Header */
+.maestro-faq-chat__header {
+  background: linear-gradient(135deg, var(--maestro-navy, #1a2e46) 0%, #243a56 100%);
+  color: #fff;
+  padding: 16px 16px 14px;
+}
+
+.maestro-faq-chat__header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.maestro-faq-chat__agent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.maestro-faq-chat__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--maestro-primary, #ffbb02);
+  flex-shrink: 0;
+}
+
+.maestro-faq-chat__avatar svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.maestro-faq-chat__agent-name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.maestro-faq-chat__agent-status {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.maestro-faq-chat__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.maestro-faq-chat__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.maestro-faq-chat__icon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.maestro-faq-chat__icon-btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Messages */
+.maestro-faq-chat__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+.maestro-faq-chat__message {
+  display: flex;
+  max-width: 88%;
+}
+
+.maestro-faq-chat__message.is-assistant {
+  align-self: flex-start;
+}
+
+.maestro-faq-chat__message.is-user {
+  align-self: flex-end;
+}
+
+.maestro-faq-chat__bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.maestro-faq-chat__message.is-assistant .maestro-faq-chat__bubble {
+  background: #fff;
+  color: var(--maestro-navy, #1a2e46);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(26, 46, 70, 0.06);
+}
+
+.maestro-faq-chat__message.is-user .maestro-faq-chat__bubble {
+  background: linear-gradient(135deg, var(--maestro-navy, #1a2e46) 0%, #243a56 100%);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* Typing indicator */
+.maestro-faq-chat__typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(26, 46, 70, 0.06);
+}
+
+.maestro-faq-chat__typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--maestro-navy, #1a2e46);
+  opacity: 0.35;
+  animation: maestro-faq-chat-typing 1.2s infinite ease-in-out;
+}
+
+.maestro-faq-chat__typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.maestro-faq-chat__typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Quick replies */
+.maestro-faq-chat__quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.maestro-faq-chat__quick-reply {
+  padding: 8px 14px;
+  border: 1px solid rgba(26, 46, 70, 0.15);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--maestro-navy, #1a2e46);
+  font-size: 0.8rem;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.maestro-faq-chat__quick-reply:hover:not(:disabled) {
+  border-color: var(--maestro-primary, #ffbb02);
+  background: rgba(255, 187, 2, 0.12);
+}
+
+.maestro-faq-chat__quick-reply:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Composer */
+.maestro-faq-chat__composer {
+  padding: 12px 14px 14px;
+  background: #fff;
+  border-top: 1px solid rgba(26, 46, 70, 0.08);
+}
+
+.maestro-faq-chat__composer-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.maestro-faq-chat__input {
+  flex: 1;
+  min-height: 42px;
+  max-height: 120px;
+  padding: 10px 14px;
+  border: 1px solid rgba(26, 46, 70, 0.12);
+  border-radius: 12px;
+  resize: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--maestro-navy, #1a2e46);
+  background: #f8f9fb;
+}
+
+.maestro-faq-chat__input:focus {
+  outline: none;
+  border-color: var(--maestro-primary, #ffbb02);
+  box-shadow: 0 0 0 3px rgba(255, 187, 2, 0.2);
+}
+
+.maestro-faq-chat__input:disabled {
+  opacity: 0.6;
+}
+
+.maestro-faq-chat__send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--maestro-primary, #ffbb02);
+  color: var(--maestro-navy, #1a2e46);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.maestro-faq-chat__send:hover:not(:disabled) {
+  background: #e6a800;
+}
+
+.maestro-faq-chat__send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.maestro-faq-chat__send svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.maestro-faq-chat__faqs-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--maestro-navy, #1a2e46);
+  opacity: 0.7;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.maestro-faq-chat__faqs-link:hover {
+  opacity: 1;
+  color: var(--maestro-primary, #ffbb02);
+}
+
+/* Animations */
+@keyframes maestro-faq-chat-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes maestro-faq-chat-typing {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* Mobile: bottom sheet + launcher offset from scroll-to-top */
+@media screen and (max-width: 767px) {
+  .maestro-faq-chat {
+    inset-inline-end: 16px;
+    inset-block-end: 80px;
+  }
+
+  .maestro-faq-chat__panel {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    width: 100%;
+    max-height: min(85vh, 640px);
+    border-radius: 20px 20px 0 0;
+    animation: maestro-faq-chat-sheet-up 0.35s ease;
+  }
+
+  .maestro-faq-chat__launcher {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@keyframes maestro-faq-chat-sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .maestro-faq-chat__teaser,
+  .maestro-faq-chat__panel,
+  .maestro-faq-chat__launcher {
+    animation: none;
+    transition: none;
+  }
+
+  .maestro-faq-chat__typing span {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .maestro-faq-chat__messages {
+    scroll-behavior: auto;
+  }
+}

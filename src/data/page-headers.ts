@@ -1,6 +1,4 @@
-export const DEFAULT_PAGE_HEADER_IMAGE = 'sliders/maestro-slider-06.jpg'
-
-/** Optional per-page header images, keyed by route id. Falls back to DEFAULT_PAGE_HEADER_IMAGE. */
+/** Optional per-page header images, keyed by route id. Omit for the default solid dark banner. */
 export const pageHeaderImages: Partial<Record<string, string>> = {
   // 'solutions.fleet-management': 'sliders/maestro-slider-05.jpg',
   // 'company.contact': 'sliders/maestro-slider-09.jpg',

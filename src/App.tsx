@@ -4,10 +4,14 @@ import { hubRedirects, routes } from './data/navigation'
 import { pageHeaderImages } from './data/page-headers'
 import { AboutMaestroPage } from './pages/AboutMaestroPage'
 import { AboutTheSofttribePage } from './pages/AboutTheSofttribePage'
+import { CareerDetailPage } from './pages/CareerDetailPage'
+import { CareersPage } from './pages/CareersPage'
 import { FaqsPage } from './pages/FaqsPage'
 import { ContactPage } from './pages/ContactPage'
 import { HomePage } from './pages/HomePage'
 import { IndustriesPage } from './pages/IndustriesPage'
+import { NewsArticlePage } from './pages/NewsArticlePage'
+import { NewsInsightsPage } from './pages/NewsInsightsPage'
 import { PlaceholderPage } from './pages/PlaceholderPage'
 import { SolutionsPage } from './pages/SolutionsPage'
 
@@ -18,6 +22,8 @@ const dedicatedPaths = new Set([
   '/contact',
   '/company/about-maestro',
   '/company/about-thesofttribe',
+  '/company/careers',
+  '/company/news-insights',
 ])
 
 function App() {
@@ -32,6 +38,10 @@ function App() {
           <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/company/about-maestro" element={<AboutMaestroPage />} />
           <Route path="/company/about-thesofttribe" element={<AboutTheSofttribePage />} />
+          <Route path="/company/careers" element={<CareersPage />} />
+          <Route path="/company/careers/:slug" element={<CareerDetailPage />} />
+          <Route path="/company/news-insights" element={<NewsInsightsPage />} />
+          <Route path="/company/news-insights/:slug" element={<NewsArticlePage />} />
           {hubRedirects.map((redirect) => (
             <Route
               key={redirect.from}

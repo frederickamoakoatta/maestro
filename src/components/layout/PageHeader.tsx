@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { DEFAULT_PAGE_HEADER_IMAGE, pageSectionLabel } from '../../data/page-headers'
+import { pageSectionLabel } from '../../data/page-headers'
 import { asset } from '../../utils/assets'
 import { Icon } from '../ui/Icon'
 
@@ -8,17 +8,36 @@ interface PageHeaderProps {
   backgroundImage?: string
   eyebrow?: string
   path?: string
+  parent?: { label: string; href: string }
+  /** Softens the banner image so title and breadcrumbs stay in focus. */
+  blurred?: boolean
 }
 
-export function PageHeader({ title, backgroundImage, eyebrow, path }: PageHeaderProps) {
-  const image = backgroundImage ?? DEFAULT_PAGE_HEADER_IMAGE
+export function PageHeader({ title, backgroundImage, eyebrow, path, parent, blurred }: PageHeaderProps) {
+  const hasImage = Boolean(backgroundImage)
+  const useBlurred = Boolean(blurred && hasImage)
   const section = eyebrow ?? (path ? pageSectionLabel(path) : undefined)
+
+  const headerClass = [
+    'maestro-page-header',
+    'position-relative',
+    'overflow-hidden',
+    useBlurred ? 'maestro-page-header--blurred' : '',
+    !useBlurred && !hasImage ? 'maestro-page-header--solid' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return (
     <header
-      className="maestro-page-header position-relative overflow-hidden"
-      style={{ ['--maestro-page-header-image' as string]: `url(${asset(image)})` }}
+      className={headerClass}
+      style={
+        hasImage
+          ? { ['--maestro-page-header-image' as string]: `url(${asset(backgroundImage!)})` }
+          : undefined
+      }
     >
+      {useBlurred && <div className="maestro-page-header__bg" aria-hidden="true" />}
       <div className="maestro-page-header__overlay" aria-hidden="true" />
       <div className="container position-relative z-1">
         {section && (
@@ -30,11 +49,20 @@ export function PageHeader({ title, backgroundImage, eyebrow, path }: PageHeader
         {path && (
           <nav className="maestro-page-header__crumbs cursor-small" aria-label="Breadcrumb">
             <Link to="/">Home</Link>
-            {section && path !== '/contact' && section !== title && (
+            {parent ? (
               <>
                 <Icon name="caret-right" weight="bold" />
-                <span>{section}</span>
+                <Link to={parent.href}>{parent.label}</Link>
               </>
+            ) : (
+              section &&
+              path !== '/contact' &&
+              section !== title && (
+                <>
+                  <Icon name="caret-right" weight="bold" />
+                  <span>{section}</span>
+                </>
+              )
             )}
             <Icon name="caret-right" weight="bold" />
             <span aria-current="page">{title}</span>

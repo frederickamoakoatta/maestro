@@ -176,3 +176,44 @@ export interface CatalogPage {
   headerImage?: string
   sections: CatalogSection[]
 }
+
+export interface CompanyPageContent {
+  id: string
+  title: string
+  eyebrow: string
+  heading: string
+  description: string
+  intro?: string
+  headerImage?: string
+}
+
+export interface CareerBenefit {
+  title: string
+  description: string
+  icon: string
+}
+
+export interface JobOpening {
+  id: string
+  title: string
+  department: string
+  location: string
+  type: string
+  summary: string
+  responsibilities: string[]
+  requirements: string[]
+}
+
+export type InsightCategory = 'product' | 'industry' | 'company'
+
+export interface InsightArticle {
+  id: string
+  title: string
+  excerpt: string
+  category: InsightCategory
+  categoryLabel: string
+  date: string
+  readTime: string
+  image: string
+  body: string[]
+}

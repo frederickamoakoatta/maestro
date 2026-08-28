@@ -28,10 +28,9 @@
   background: #141e30;
 }
 
-.maestro-section--what-is-maestro::before {
-  content: '';
+.maestro-what-is-maestro__bg {
   position: absolute;
-  inset: 0;
+  inset: -12% 0;
   z-index: 0;
   background-color: #141e30;
   background-image:
@@ -42,6 +41,24 @@
   background-repeat: no-repeat;
   background-position: 0% 20%, 100% 80%, center;
   animation: maestro-what-is-gradient-radial 36s ease-in-out infinite;
+  will-change: transform;
+}
+
+.maestro-section--what-is-maestro--light {
+  background: #fff;
+}
+
+.maestro-section--what-is-maestro--light .splitTextStyleOne {
+  color: var(--maestro-navy, #1a2e46) !important;
+}
+
+.maestro-section--what-is-maestro--light .maestro-app-showcase__tablet,
+.maestro-section--what-is-maestro--light .maestro-app-showcase__phone {
+  filter: drop-shadow(0 24px 48px rgba(26, 46, 70, 0.18));
+}
+
+.maestro-app-showcase--parallax {
+  will-change: transform;
 }
 
 @keyframes maestro-what-is-gradient-radial {
@@ -60,12 +77,18 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .maestro-section--what-is-maestro::before {
+  .maestro-what-is-maestro__bg {
     animation: none;
+    inset: 0;
     background-color: #141e30;
     background-image: radial-gradient(circle at 30% 40%, #1a2e46, #141e30);
     background-size: auto;
     background-position: center;
+    transform: none !important;
+  }
+
+  .maestro-app-showcase--parallax {
+    transform: none !important;
   }
 }
 
@@ -631,7 +654,7 @@
 .maestro-industry-card {
   display: flex;
   flex-direction: column;
-  width: 20.5rem;
+  width: 100%;
   flex-shrink: 0;
   min-height: 22rem;
 }
@@ -685,40 +708,64 @@
   color: #fff;
 }
 
-.maestro-industries-marquee {
-  overflow: hidden;
-  margin-top: 0.5rem;
+.maestro-industries-carousel {
+  position: relative;
+  padding-inline: clamp(3.25rem, 6vw, 4.5rem);
 }
 
-.maestro-industries-marquee__track {
-  display: flex;
-  width: max-content;
-  gap: 1.15rem;
-  padding-inline: 1.15rem;
-  animation: maestro-industries-scroll 42s linear infinite;
+.maestro-industries-carousel__swiper {
+  overflow: visible;
 }
 
-.maestro-industries-marquee:hover .maestro-industries-marquee__track {
-  animation-play-state: paused;
+.maestro-industries-carousel__slide {
+  height: auto;
 }
 
-@keyframes maestro-industries-scroll {
-  from {
-    transform: translateX(0);
+.maestro-industries-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(20, 30, 48, 0.72);
+  color: #fff;
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateY(-50%);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.maestro-industries-carousel__arrow:hover {
+  background: var(--maestro-primary, #ffbb02);
+  border-color: var(--maestro-primary, #ffbb02);
+  color: var(--maestro-navy, #1a2e46);
+}
+
+.maestro-industries-carousel__arrow--prev {
+  left: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.maestro-industries-carousel__arrow--next {
+  right: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+@media (max-width: 575px) {
+  .maestro-industries-carousel {
+    padding-inline: 3rem;
   }
 
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .maestro-industries-marquee {
-    overflow-x: auto;
-  }
-
-  .maestro-industries-marquee__track {
-    animation: none;
+  .maestro-industries-carousel__arrow {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
 

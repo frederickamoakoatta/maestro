@@ -1,4 +1,7 @@
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import type { Swiper as SwiperType } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { industriesOverview } from '../../data/content/homepage/industries'
 import { aosAttrs } from '../../utils/aos'
 import { asset } from '../../utils/assets'
@@ -6,7 +9,10 @@ import { Icon } from '../ui/Icon'
 import { SectionHeading } from '../ui/SectionHeading'
 
 export function IndustriesOverviewSection() {
-  const marqueeItems = [...industriesOverview, ...industriesOverview]
+  const swiperRef = useRef<SwiperType | null>(null)
+
+  const goPrev = () => swiperRef.current?.slidePrev()
+  const goNext = () => swiperRef.current?.slideNext()
 
   return (
     <section
@@ -29,31 +35,63 @@ export function IndustriesOverviewSection() {
         </div>
       </div>
 
-      <div className="maestro-industries-marquee position-relative z-1" aria-label="Industries we serve">
-        <div className="maestro-industries-marquee__track">
-          {marqueeItems.map((industry, index) => (
-            <article
-              key={`${industry.title}-${index}`}
-              className="maestro-outcome-card maestro-industry-card"
-              aria-hidden={index >= industriesOverview.length}
-            >
-              <span className="maestro-outcome-card__icon" aria-hidden="true">
-                <Icon name={industry.icon} weight="regular" />
-              </span>
-              <h3 className="maestro-outcome-card__title cursor-big">{industry.title}</h3>
-              <p className="maestro-industry-card__desc cursor-small">{industry.description}</p>
-              <ul className="maestro-industry-card__list">
-                {industry.idealFor.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <Link to={industry.href} className="maestro-industry-card__link cursor-small" tabIndex={index >= industriesOverview.length ? -1 : undefined}>
-                Learn more
-                <Icon name="arrow-up-right" weight="bold" />
-              </Link>
-            </article>
+      <div className="maestro-industries-carousel position-relative z-1" aria-label="Industries we serve">
+        <button
+          type="button"
+          className="maestro-industries-carousel__arrow maestro-industries-carousel__arrow--prev cursor-small"
+          aria-label="Previous industry"
+          onClick={goPrev}
+        >
+          <Icon name="arrow-left" weight="bold" />
+        </button>
+
+        <Swiper
+          className="maestro-industries-carousel__swiper"
+          spaceBetween={18}
+          speed={650}
+          slidesPerView={1.12}
+          breakpoints={{
+            576: { slidesPerView: 1.35, spaceBetween: 20 },
+            768: { slidesPerView: 2.15, spaceBetween: 22 },
+            1200: { slidesPerView: 3.1, spaceBetween: 24 },
+          }}
+          onSwiper={(instance) => {
+            swiperRef.current = instance
+          }}
+          onBeforeDestroy={(instance) => {
+            if (swiperRef.current === instance) swiperRef.current = null
+          }}
+        >
+          {industriesOverview.map((industry) => (
+            <SwiperSlide key={industry.title} className="maestro-industries-carousel__slide">
+              <article className="maestro-outcome-card maestro-industry-card h-100">
+                <span className="maestro-outcome-card__icon" aria-hidden="true">
+                  <Icon name={industry.icon} weight="regular" />
+                </span>
+                <h3 className="maestro-outcome-card__title cursor-big">{industry.title}</h3>
+                <p className="maestro-industry-card__desc cursor-small">{industry.description}</p>
+                <ul className="maestro-industry-card__list">
+                  {industry.idealFor.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <Link to={industry.href} className="maestro-industry-card__link cursor-small">
+                  Learn more
+                  <Icon name="arrow-up-right" weight="bold" />
+                </Link>
+              </article>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
+
+        <button
+          type="button"
+          className="maestro-industries-carousel__arrow maestro-industries-carousel__arrow--next cursor-small"
+          aria-label="Next industry"
+          onClick={goNext}
+        >
+          <Icon name="arrow-right" weight="bold" />
+        </button>
       </div>
     </section>
   )
