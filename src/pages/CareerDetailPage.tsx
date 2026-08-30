@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { CareerApplyModal } from '../components/company/CareerApplyModal'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
 import { PageHeader } from '../components/layout/PageHeader'
 import { Icon } from '../components/ui/Icon'
@@ -8,6 +10,7 @@ import { aosAttrs } from '../utils/aos'
 export function CareerDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const job = slug ? getJobOpening(slug) : undefined
+  const [applyOpen, setApplyOpen] = useState(false)
 
   if (!job) {
     return <Navigate to="/company/careers" replace />
@@ -21,7 +24,6 @@ export function CareerDetailPage() {
         eyebrow={careersPage.title}
         parent={{ label: careersPage.title, href: '/company/careers' }}
         backgroundImage="sliders/maestro-slider-07.jpg"
-        blurred
       />
 
       <section className="maestro-career-detail py-140">
@@ -44,10 +46,14 @@ export function CareerDetailPage() {
                     <span>{job.type}</span>
                   </li>
                 </ul>
-                <Link to="/contact" className="maestro-career-detail__apply cursor-small">
+                <button
+                  type="button"
+                  className="maestro-career-detail__apply cursor-small"
+                  onClick={() => setApplyOpen(true)}
+                >
                   Apply for this role
                   <Icon name="arrow-up-right" weight="bold" />
-                </Link>
+                </button>
                 <Link to="/company/careers" className="maestro-career-detail__back cursor-small">
                   <Icon name="arrow-left" weight="bold" />
                   All open roles
@@ -89,6 +95,12 @@ export function CareerDetailPage() {
       </section>
 
       <HomeCtaSection />
+
+      <CareerApplyModal
+        open={applyOpen}
+        onClose={() => setApplyOpen(false)}
+        jobTitle={job.title}
+      />
     </>
   )
 }

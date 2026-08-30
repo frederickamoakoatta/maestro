@@ -4,10 +4,10 @@ import { SectionHeading } from '../ui/SectionHeading'
 
 export function PlatformOverviewSection() {
   return (
-    <section className="maestro-section py-140 bg-white">
+    <section className="maestro-section maestro-section--platform-overview">
       <div className="container">
-        <div className="row gy-5 align-items-center">
-          <div className="col-lg-5" {...aosAttrs(0)}>
+        <div className="row gy-4 align-items-center">
+          <div className="col-12 col-lg-5" {...aosAttrs(0)}>
             <SectionHeading
               eyebrow={platformOverview.eyebrow}
               title={platformOverview.title}
@@ -15,10 +15,10 @@ export function PlatformOverviewSection() {
               titleTag="h2"
             />
           </div>
-          <div className="col-lg-7" {...aosAttrs(120, 'fade-left')}>
+          <div className="col-12 col-lg-7" {...aosAttrs(120, 'fade-left')}>
             <div className="maestro-prose">
               {platformOverview.paragraphs?.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)} className="cursor-small tw-mb-5">
+                <p key={paragraph.slice(0, 40)} className="cursor-small tw-mb-4">
                   {paragraph}
                 </p>
               ))}

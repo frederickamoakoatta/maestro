@@ -24,8 +24,67 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
+.maestro-section--platform-overview {
+  background: #fff;
+  padding-block-start: clamp(4rem, 7vw, 6.25rem);
+  padding-block-end: clamp(6rem, 11vw, 10.5rem);
+}
+
 .maestro-section--what-is-maestro {
   background: #141e30;
+  overflow-x: clip;
+  overflow-y: visible;
+  padding-block: clamp(4rem, 7vw, 6.25rem);
+}
+
+.maestro-what-is-maestro__layout {
+  position: relative;
+}
+
+.maestro-what-is-maestro__showcase-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.maestro-what-is-maestro__showcase-col .maestro-app-composite-stage {
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .maestro-what-is-maestro__showcase-col {
+    position: static;
+    min-height: clamp(20rem, 40vw, 32rem);
+  }
+
+  .maestro-what-is-maestro__showcase-col .maestro-app-composite-stage {
+    position: absolute;
+    left: 47%;
+    top: 50%;
+    width: min(1020px, 62vw);
+    max-width: none;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .maestro-what-is-maestro__showcase-col .maestro-app-composite {
+    width: 100%;
+    min-height: clamp(18rem, 38vw, 32rem);
+    aspect-ratio: 1.22 / 1;
+  }
+
+  .maestro-what-is-maestro__showcase-col .maestro-app-composite__tablet {
+    width: 100%;
+  }
+
+  .maestro-what-is-maestro__showcase-col .maestro-app-composite__pie {
+    right: -2%;
+    width: 32%;
+  }
+}
+
+.maestro-what-is-maestro__showcase-col .maestro-app-composite {
+  margin-block: auto;
 }
 
 .maestro-what-is-maestro__bg {
@@ -52,9 +111,13 @@
   color: var(--maestro-navy, #1a2e46) !important;
 }
 
-.maestro-section--what-is-maestro--light .maestro-app-showcase__tablet,
-.maestro-section--what-is-maestro--light .maestro-app-showcase__phone {
+.maestro-section--what-is-maestro--light .maestro-app-composite__layer {
   filter: drop-shadow(0 24px 48px rgba(26, 46, 70, 0.18));
+}
+
+.maestro-app-composite-stage {
+  position: relative;
+  width: 100%;
 }
 
 .maestro-app-showcase--parallax {
@@ -90,6 +153,12 @@
   .maestro-app-showcase--parallax {
     transform: none !important;
   }
+
+  @media (min-width: 992px) {
+    .maestro-what-is-maestro__showcase-col .maestro-app-composite-stage {
+      transform: translateY(-50%);
+    }
+  }
 }
 
 .maestro-media-card {
@@ -100,16 +169,168 @@
 
 .maestro-app-showcase {
   position: relative;
-  min-height: clamp(16rem, 32vw, 24rem);
-  padding: 1.5rem 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(18rem, 38vw, 28rem);
+  padding: 0;
+}
+
+/* Layered app dashboard composite */
+.maestro-app-composite {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.35 / 1;
+  min-height: clamp(20rem, 44vw, 34rem);
+  margin-inline: auto;
+}
+
+.maestro-app-composite__layer {
+  position: absolute;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.maestro-app-composite__tablet {
+  left: 50%;
+  top: 8%;
+  width: 78%;
+  transform: translateX(-50%);
+  z-index: 1;
+  filter: drop-shadow(0 28px 56px rgba(0, 0, 0, 0.42));
+  animation:
+    maestro-app-composite-enter-center 1s cubic-bezier(0.22, 1, 0.36, 1) both,
+    maestro-app-float-center 7s ease-in-out 1s infinite;
+}
+
+.maestro-app-composite__stats {
+  width: 28%;
+  z-index: 3;
+  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.28));
+}
+
+.maestro-app-composite__stats--one {
+  left: -2%;
+  top: 22%;
+  animation:
+    maestro-app-composite-enter-left 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both,
+    maestro-app-float 6.2s ease-in-out 1.1s infinite;
+}
+
+.maestro-app-composite__stats--two {
+  left: -2%;
+  top: 42%;
+  animation:
+    maestro-app-composite-enter-left 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both,
+    maestro-app-float 6.8s ease-in-out 1.3s infinite;
+  animation-delay: 0.22s, 1.3s;
+}
+
+.maestro-app-composite__pie {
+  right: -4%;
+  top: 8%;
+  width: 30%;
+  z-index: 4;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.32));
+  animation:
+    maestro-app-composite-enter-right 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both,
+    maestro-app-composite-drift 5.5s ease-in-out 1.05s infinite;
+}
+
+.maestro-app-composite__trucks {
+  left: 50%;
+  bottom: 2%;
+  width: 94%;
+  z-index: 5;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.38));
+  animation:
+    maestro-app-composite-enter-bottom 1.05s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both,
+    maestro-app-composite-sway 8s ease-in-out 1.4s infinite;
+}
+
+@keyframes maestro-app-composite-enter-center {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(28px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes maestro-app-composite-enter-left {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes maestro-app-composite-enter-right {
+  from {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes maestro-app-composite-enter-bottom {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes maestro-app-composite-drift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(0.6deg);
+  }
+}
+
+@keyframes maestro-app-composite-sway {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(calc(-50% + 6px)) translateY(-10px);
+  }
 }
 
 .maestro-app-showcase__tablet {
   display: block;
   width: 100%;
-  max-width: 34rem;
-  margin-inline: auto;
+  max-width: 100%;
   height: auto;
+  margin-inline: auto;
   filter: drop-shadow(0 28px 56px rgba(0, 0, 0, 0.42));
 }
 
@@ -133,6 +354,17 @@
   }
 }
 
+@keyframes maestro-app-float-center {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-14px);
+  }
+}
+
 .maestro-app-float {
   animation: maestro-app-float 6s ease-in-out infinite;
   will-change: transform;
@@ -146,6 +378,20 @@
 @media (prefers-reduced-motion: reduce) {
   .maestro-app-float {
     animation: none;
+  }
+
+  .maestro-app-composite__layer {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .maestro-app-composite__tablet {
+    transform: translateX(-50%);
+    animation: none !important;
+  }
+
+  .maestro-app-composite__trucks {
+    transform: translateX(-50%);
   }
 }
 
@@ -176,7 +422,7 @@
 
 .maestro-logistics-visual {
   position: relative;
-  min-height: clamp(18rem, 34vw, 24rem);
+  min-height: clamp(20rem, 38vw, 28rem);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -186,11 +432,11 @@
 @keyframes maestro-logistics-drift {
   0%,
   100% {
-    transform: translateX(-14px);
+    transform: translateY(-50%) translateX(0);
   }
 
   50% {
-    transform: translateX(14px);
+    transform: translateY(-50%) translateX(-24px);
   }
 }
 
@@ -207,7 +453,7 @@
 .maestro-logistics-visual__phone {
   position: relative;
   z-index: 1;
-  width: min(46%, 13.5rem);
+  width: min(62%, 17.5rem);
   height: auto;
   filter: drop-shadow(0 24px 40px rgba(26, 46, 70, 0.22));
 }
@@ -215,8 +461,9 @@
 .maestro-logistics-visual__card {
   position: absolute;
   z-index: 2;
-  left: 4%;
-  top: 22%;
+  right: 4%;
+  top: 50%;
+  left: auto;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -226,6 +473,7 @@
   border: 1px solid rgba(26, 46, 70, 0.08);
   border-inline-start: 3px solid var(--maestro-primary, #ffbb02);
   box-shadow: 0 18px 40px rgba(26, 46, 70, 0.12);
+  transform: translateY(-50%);
   animation: maestro-logistics-drift 9s ease-in-out infinite;
   will-change: transform;
 }
@@ -343,7 +591,7 @@
   }
 
   .maestro-logistics-visual {
-    min-height: 16rem;
+    min-height: 18rem;
   }
 }
 

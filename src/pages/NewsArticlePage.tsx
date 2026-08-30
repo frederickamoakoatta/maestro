@@ -28,7 +28,6 @@ export function NewsArticlePage() {
         eyebrow={article.categoryLabel}
         parent={{ label: newsInsightsPage.title, href: '/company/news-insights' }}
         backgroundImage={article.image}
-        blurred
       />
 
       <section className="maestro-article-detail py-140">

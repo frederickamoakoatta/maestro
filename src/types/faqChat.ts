@@ -31,3 +31,24 @@ export interface FaqChatResponse {
   sessionId?: string
   quickReplies?: FaqChatQuickReply[]
 }
+
+/** Emit Labs Chatbot API — POST /api/v1/bots/{bot}/chat */
+export interface EmitChatRequest {
+  client_id: string
+  question: string
+}
+
+export interface EmitChatAction {
+  type: 'contact'
+  label: string
+  href: string
+}
+
+export interface EmitChatResponse {
+  interaction_id: string
+  bot: string
+  outcome: 'answered' | 'fallback'
+  answer: string
+  answered: boolean
+  actions?: EmitChatAction[] | null
+}

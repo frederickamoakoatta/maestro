@@ -13,14 +13,22 @@
 
 .maestro-faq-chat {
   position: fixed;
-  inset-inline-end: max(24px, env(safe-area-inset-right));
-  inset-block-end: max(24px, env(safe-area-inset-bottom));
   z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 12px;
   pointer-events: none;
+  inset-inline-start: auto;
+}
+
+.maestro-faq-chat:not(.is-open) {
+  inset-inline-end: max(var(--maestro-scroll-top-inset, 36px), env(safe-area-inset-right));
+  inset-block-end: calc(
+    max(var(--maestro-scroll-top-inset, 36px), env(safe-area-inset-bottom))
+    + var(--maestro-scroll-top-size, 46px)
+    + var(--maestro-faq-chat-gap, 12px)
+  );
 }
 
 .maestro-faq-chat.is-open {
@@ -28,6 +36,22 @@
   inset-block-end: 0;
   align-items: stretch;
   gap: 0;
+}
+
+@media screen and (min-width: 992px) {
+  .maestro-faq-chat.is-open {
+    inset-inline-start: auto;
+    inset-inline-end: max(var(--maestro-scroll-top-inset, 36px), env(safe-area-inset-right));
+    inset-block-end: max(var(--maestro-scroll-top-inset, 36px), env(safe-area-inset-bottom));
+    inset-block-start: auto;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .maestro-faq-chat.is-open .maestro-faq-chat__panel-wrap {
+    align-items: flex-end;
+    width: min(380px, calc(100vw - 32px));
+  }
 }
 
 .maestro-faq-chat > * {
@@ -297,27 +321,34 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding-top: 4px;
+  padding-top: 8px;
 }
 
 .maestro-faq-chat__quick-reply {
   padding: 8px 14px;
-  border: 1px solid rgba(26, 46, 70, 0.15);
+  border: 1.5px solid var(--maestro-primary, #ffbb02);
   border-radius: 999px;
-  background: #fff;
+  background: rgba(255, 187, 2, 0.08);
   color: var(--maestro-navy, #1a2e46);
   font-size: 0.8rem;
+  font-weight: 600;
   line-height: 1.3;
   text-align: start;
   max-width: 100%;
   white-space: normal;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 0 0 1px rgba(255, 187, 2, 0.15);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .maestro-faq-chat__quick-reply:hover:not(:disabled) {
-  border-color: var(--maestro-primary, #ffbb02);
-  background: rgba(255, 187, 2, 0.12);
+  border-color: var(--maestro-navy, #1a2e46);
+  background: rgba(255, 187, 2, 0.18);
+  box-shadow: 0 0 0 1px rgba(26, 46, 70, 0.12);
 }
 
 .maestro-faq-chat__quick-reply:disabled {
@@ -443,11 +474,6 @@
 
 /* Tablet */
 @media screen and (max-width: 991px) {
-  .maestro-faq-chat:not(.is-open) {
-    inset-inline-end: max(16px, env(safe-area-inset-right));
-    inset-block-end: max(72px, calc(env(safe-area-inset-bottom) + 56px));
-  }
-
   .maestro-faq-chat.is-open .maestro-faq-chat__panel-wrap {
     position: fixed;
     inset-inline: 0;
@@ -476,11 +502,6 @@
 
 /* Mobile */
 @media screen and (max-width: 767px) {
-  .maestro-faq-chat:not(.is-open) {
-    inset-inline-end: max(16px, env(safe-area-inset-right));
-    inset-block-end: max(80px, calc(env(safe-area-inset-bottom) + 56px));
-  }
-
   .maestro-faq-chat__panel {
     max-height: min(88vh, calc(100dvh - env(safe-area-inset-top) - 1rem));
   }

@@ -5,6 +5,7 @@ export const newsInsightsPage: CompanyPageContent = {
   title: 'News & Insights',
   eyebrow: 'Company',
   heading: 'Product updates and industry perspectives',
+  headerImage: 'sliders/maestro-slider-06.jpg',
   description:
     'Stay up to date with Maestro product news, logistics industry trends and stories from the team building modern transport technology.',
   intro:
@@ -17,6 +18,19 @@ export const insightCategories: { id: InsightCategory | 'all'; label: string }[]
   { id: 'industry', label: 'Industry' },
   { id: 'company', label: 'Company' },
 ]
+
+export const newsInsightsEmptyState = {
+  icon: 'newspaper',
+  title: 'No articles yet',
+  description:
+    'We’re preparing news and insights about Maestro and the logistics industry. Check back soon for product updates and stories from our team.',
+}
+
+export const newsInsightsFilterEmptyState = {
+  icon: 'magnifying-glass',
+  title: 'No articles in this category',
+  description: 'Try another filter or view all articles to see everything we’ve published.',
+}
 
 export const insightArticles: InsightArticle[] = [
   {

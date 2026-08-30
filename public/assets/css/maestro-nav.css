@@ -474,7 +474,25 @@
 
 /* ── Scroll to top ────────────────────────────────────────────────────── */
 
+:root {
+  --maestro-scroll-top-size: 46px;
+  --maestro-scroll-top-inset: 36px;
+  --maestro-faq-chat-gap: 12px;
+}
+
+@media (max-width: 991px) {
+  :root {
+    --maestro-scroll-top-size: 40px;
+    --maestro-scroll-top-inset: 1rem;
+  }
+}
+
 .progress-wrap.maestro-scroll-top {
+  inset-inline-end: max(var(--maestro-scroll-top-inset), env(safe-area-inset-right));
+  inset-block-end: max(var(--maestro-scroll-top-inset), env(safe-area-inset-bottom));
+  width: var(--maestro-scroll-top-size);
+  height: var(--maestro-scroll-top-size);
+  line-height: var(--maestro-scroll-top-size);
   display: inline-flex;
   align-items: center;
   justify-content: center;

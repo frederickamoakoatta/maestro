@@ -78,7 +78,7 @@ export function CapabilitiesSection() {
             <div className="maestro-capabilities-collage">
               <div
                 className="maestro-capabilities-collage__hero"
-                style={bgStyle('apps/maestro-feature-01.jpeg')}
+                style={bgStyle('apps/maestro-feature-001.jpg')}
                 role="img"
                 aria-hidden="true"
               />
