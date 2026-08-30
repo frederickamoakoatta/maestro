@@ -9,21 +9,18 @@ interface PageHeaderProps {
   eyebrow?: string
   path?: string
   parent?: { label: string; href: string }
-  /** Softens the banner image so title and breadcrumbs stay in focus. */
-  blurred?: boolean
 }
 
-export function PageHeader({ title, backgroundImage, eyebrow, path, parent, blurred }: PageHeaderProps) {
+export function PageHeader({ title, backgroundImage, eyebrow, path, parent }: PageHeaderProps) {
   const hasImage = Boolean(backgroundImage)
-  const useBlurred = Boolean(blurred && hasImage)
   const section = eyebrow ?? (path ? pageSectionLabel(path) : undefined)
 
   const headerClass = [
     'maestro-page-header',
     'position-relative',
     'overflow-hidden',
-    useBlurred ? 'maestro-page-header--blurred' : '',
-    !useBlurred && !hasImage ? 'maestro-page-header--solid' : '',
+    hasImage ? 'maestro-page-header--blurred' : '',
+    !hasImage ? 'maestro-page-header--solid' : '',
   ]
     .filter(Boolean)
     .join(' ')
@@ -37,7 +34,7 @@ export function PageHeader({ title, backgroundImage, eyebrow, path, parent, blur
           : undefined
       }
     >
-      {useBlurred && <div className="maestro-page-header__bg" aria-hidden="true" />}
+      {hasImage && <div className="maestro-page-header__bg" aria-hidden="true" />}
       <div className="maestro-page-header__overlay" aria-hidden="true" />
       <div className="container position-relative z-1">
         {section && (

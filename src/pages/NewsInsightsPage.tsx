@@ -2,9 +2,12 @@ import { useMemo, useState } from 'react'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
 import { InsightCard } from '../components/company/InsightCard'
 import { PageHeader } from '../components/layout/PageHeader'
+import { ListEmptyState } from '../components/shared/ListEmptyState'
 import {
   insightArticles,
   insightCategories,
+  newsInsightsEmptyState,
+  newsInsightsFilterEmptyState,
   newsInsightsPage,
 } from '../data/content/company/news-insights'
 import type { InsightCategory } from '../types'
@@ -21,9 +24,18 @@ export function NewsInsightsPage() {
     [activeCategory],
   )
 
+  const hasArticles = insightArticles.length > 0
+  const hasVisibleArticles = visibleArticles.length > 0
+  const emptyState =
+    hasArticles && !hasVisibleArticles ? newsInsightsFilterEmptyState : newsInsightsEmptyState
+
   return (
     <>
-      <PageHeader title={newsInsightsPage.title} path="/company/news-insights" />
+      <PageHeader
+        title={newsInsightsPage.title}
+        path="/company/news-insights"
+        backgroundImage={newsInsightsPage.headerImage}
+      />
 
       <section className="maestro-insights py-140">
         <div className="container">
@@ -49,11 +61,17 @@ export function NewsInsightsPage() {
           </div>
 
           <div className="maestro-insights__grid">
-            {visibleArticles.map((article, index) => (
-              <div key={article.id} {...aosAttrs(index * 60)}>
-                <InsightCard article={article} />
+            {hasVisibleArticles ? (
+              visibleArticles.map((article, index) => (
+                <div key={article.id} {...aosAttrs(index * 60)}>
+                  <InsightCard article={article} />
+                </div>
+              ))
+            ) : (
+              <div className="maestro-insights__empty">
+                <ListEmptyState {...emptyState} />
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ export const heroSlides: HeroSlide[] = [
   {
     title: 'Logistics connected.',
     paragraph: 'Bookings, dispatch, fleet, and delivery—unified on one cloud platform.',
-    backgroundImage: 'sliders/maestro-slider-06.jpg',
+    backgroundImage: 'sliders/maestro-002.jpg',
     primaryCta: { label: 'Request a Demo', href: '/contact' },
     secondaryCta: { label: 'Request a Quote', href: '/contact' },
   },
@@ -12,7 +12,7 @@ export const heroSlides: HeroSlide[] = [
     title: 'Every move in real time.',
     paragraph:
       'Track vehicles in real time, coordinate drivers, and give customers the updates they expect—without the chaos.',
-    backgroundImage: 'sliders/maestro-slider-05.jpg',
+    backgroundImage: 'sliders/maestro-001.jpg',
     primaryCta: { label: 'Request a Demo', href: '/contact' },
     secondaryCta: { label: 'Speak to Our Team', href: '/contact' },
   },

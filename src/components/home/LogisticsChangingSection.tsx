@@ -22,7 +22,7 @@ export function LogisticsChangingSection() {
           <div className="col-lg-6" {...aosAttrs(140, 'fade-left')}>
             <div className="maestro-logistics-visual" aria-hidden="true">
               <img
-                src={asset('apps/maestro-placeholder-02.png')}
+                src={asset('apps/maestro-app-trucks.png')}
                 alt=""
                 className="maestro-logistics-visual__phone"
               />

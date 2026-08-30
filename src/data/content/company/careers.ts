@@ -5,6 +5,7 @@ export const careersPage: CompanyPageContent = {
   title: 'Careers',
   eyebrow: 'Company',
   heading: 'Help build the software that keeps goods and people moving',
+  headerImage: 'sliders/maestro-slider-07.jpg',
   description:
     'Join the team behind Maestro—a modern logistics platform developed by theSOFTtribe, one of Africa’s longest-established indigenous software companies.',
   intro:
@@ -145,6 +146,32 @@ export const careersApplyCta = {
     'We are always interested in hearing from talented people. Send your CV and a short note about what you would like to work on.',
   buttonLabel: 'Get in touch',
   href: '/contact',
+}
+
+export const careersEmptyState = {
+  icon: 'users',
+  title: 'No open roles right now',
+  description:
+    'We don’t have any vacancies at the moment, but we’re always interested in meeting talented people. Get in touch and tell us what you’d like to work on.',
+  actionLabel: 'Get in touch',
+  actionHref: '/contact',
+}
+
+export const careerApplyForm = {
+  title: 'Apply for this role',
+  subtitle: 'Submit your details and we will be in touch about this opportunity.',
+  fullNameLabel: 'Full name',
+  fullNamePlaceholder: 'Jane Mensah',
+  cvLabel: 'CV / Résumé',
+  cvHint: 'PDF or Word document',
+  coverLetterLabel: 'Cover letter',
+  coverLetterHint: 'PDF or Word document',
+  chooseFile: 'Choose file',
+  submitLabel: 'Submit application',
+  successTitle: 'Application received',
+  successText:
+    'Thank you. Our team will review your application and contact you if there is a match for this role.',
+  closeLabel: 'Close',
 }
 
 export function getJobOpening(slug: string): JobOpening | undefined {

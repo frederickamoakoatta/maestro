@@ -157,8 +157,80 @@
   }
 
   .maestro-app-showcase {
+    min-height: clamp(14rem, 55vw, 20rem);
+    padding: 0;
+  }
+
+  /* ── Platform Overview & What is Maestro ─────────────────────────────── */
+
+  .maestro-section--platform-overview {
+    padding-block-start: clamp(2.75rem, 8vw, 3.75rem);
+    padding-block-end: clamp(4.75rem, 16vw, 6.5rem);
+  }
+
+  .maestro-section--what-is-maestro {
+    padding-block: clamp(2.75rem, 8vw, 4rem);
+    overflow: hidden;
+  }
+
+  .maestro-what-is-maestro__bg {
+    inset: 0;
+    transform: none !important;
+  }
+
+  .maestro-app-showcase--parallax {
+    transform: none !important;
+  }
+
+  .maestro-what-is-maestro__showcase-col {
     min-height: 0;
-    padding: 0.5rem 0 1.5rem;
+    padding-block: 1rem 0.25rem;
+  }
+
+  .maestro-what-is-maestro__showcase-col .maestro-app-composite-stage {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+  }
+
+  .maestro-app-composite {
+    aspect-ratio: 1.15 / 1;
+    min-height: clamp(16rem, 62vw, 22rem);
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .maestro-app-composite__tablet {
+    width: 92%;
+  }
+
+  .maestro-app-composite__stats {
+    width: 36%;
+  }
+
+  .maestro-app-composite__stats--one {
+    left: 0;
+    top: 18%;
+  }
+
+  .maestro-app-composite__stats--two {
+    left: 0;
+    top: 38%;
+  }
+
+  .maestro-app-composite__pie {
+    right: 0;
+    top: 4%;
+    width: 36%;
+  }
+
+  .maestro-app-composite__trucks {
+    width: 100%;
+    bottom: 0;
   }
 
   .maestro-app-showcase__phone {
@@ -167,17 +239,18 @@
   }
 
   .maestro-logistics-visual {
-    min-height: 14rem;
+    min-height: 16rem;
     padding-inline: 0;
   }
 
   .maestro-logistics-visual__phone {
-    width: min(58%, 11.5rem);
+    width: min(78%, 15.5rem);
   }
 
   .maestro-logistics-visual__card {
-    left: 0;
-    top: 12%;
+    right: 0;
+    left: auto;
+    top: 50%;
     min-width: 0;
     max-width: calc(100% - 4.5rem);
   }
@@ -274,11 +347,6 @@
     width: min(26.5rem, 100%);
     padding: 1.35rem 1.15rem 1.25rem;
   }
-
-  .progress-wrap {
-    inset-inline-end: max(1rem, env(safe-area-inset-right));
-    inset-block-end: max(1rem, env(safe-area-inset-bottom));
-  }
 }
 
 @media (max-width: 575px) {
@@ -291,6 +359,25 @@
   .banner-four-height {
     padding-top: 5.75rem;
     padding-bottom: 4.75rem;
+  }
+
+  .maestro-section--platform-overview {
+    padding-block-start: clamp(2.25rem, 9vw, 3rem);
+    padding-block-end: clamp(4.25rem, 18vw, 5.75rem);
+  }
+
+  .maestro-section--what-is-maestro {
+    padding-block: clamp(2.25rem, 9vw, 3.25rem);
+  }
+
+  .maestro-app-composite {
+    min-height: clamp(14rem, 68vw, 18rem);
+    aspect-ratio: 1.08 / 1;
+  }
+
+  .maestro-app-composite__stats,
+  .maestro-app-composite__pie {
+    width: 40%;
   }
 
   .maestro-capabilities-collage {

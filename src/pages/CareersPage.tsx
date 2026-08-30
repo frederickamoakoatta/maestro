@@ -2,18 +2,22 @@ import { Link } from 'react-router-dom'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
 import { JobCard } from '../components/company/JobCard'
 import { PageHeader } from '../components/layout/PageHeader'
+import { ListEmptyState } from '../components/shared/ListEmptyState'
 import { Icon } from '../components/ui/Icon'
 import {
   careersApplyCta,
+  careersEmptyState,
   careersPage,
   jobOpenings,
 } from '../data/content/company/careers'
 import { aosAttrs } from '../utils/aos'
 
 export function CareersPage() {
+  const hasOpenRoles = jobOpenings.length > 0
+
   return (
     <>
-      <PageHeader title={careersPage.title} path="/company/careers" />
+      <PageHeader title={careersPage.title} path="/company/careers" backgroundImage={careersPage.headerImage} />
 
       <section className="maestro-careers py-140">
         <div className="container">
@@ -46,12 +50,15 @@ export function CareersPage() {
               </p>
             </div>
             <div className="maestro-careers__jobs">
-              {jobOpenings.map((job) => (
-                <JobCard key={job.id} job={job} />
-              ))}
+              {hasOpenRoles ? (
+                jobOpenings.map((job) => <JobCard key={job.id} job={job} />)
+              ) : (
+                <ListEmptyState {...careersEmptyState} />
+              )}
             </div>
           </div>
 
+          {hasOpenRoles && (
           <div className="maestro-careers-apply" {...aosAttrs(120)}>
             <h3 className="maestro-careers-apply__title cursor-big">{careersApplyCta.title}</h3>
             <p className="maestro-careers-apply__text cursor-small">{careersApplyCta.description}</p>
@@ -60,6 +67,7 @@ export function CareersPage() {
               <Icon name="caret-right" weight="bold" />
             </Link>
           </div>
+          )}
         </div>
       </section>
 
