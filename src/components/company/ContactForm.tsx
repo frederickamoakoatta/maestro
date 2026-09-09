@@ -1,5 +1,7 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { contactInquiryTypes } from '../../data/content/company/contact'
+import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
+import { contactFormCopy, contactInquiryTypes } from '../../data/content/company/contact'
+import { EnquiryApiError, submitMaestroEnquiry } from '../../services/enquiryApi'
+import type { MaestroEnquiryType } from '../../types/enquiry'
 import { Icon } from '../ui/Icon'
 
 const initialForm = {
@@ -7,23 +9,62 @@ const initialForm = {
   organisation: '',
   email: '',
   phone: '',
-  inquiry: 'demo',
+  inquiry: 'request_demo' as MaestroEnquiryType,
   message: '',
 }
 
 export function ContactForm() {
   const [form, setForm] = useState(initialForm)
-  const [status, setStatus] = useState<'idle' | 'sent'>('idle')
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'sent' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const submissionIdRef = useRef(crypto.randomUUID())
 
   const handleChange =
     (field: keyof typeof initialForm) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       setForm((current) => ({ ...current, [field]: event.target.value }))
+      if (status === 'error') {
+        setStatus('idle')
+        setErrorMessage(null)
+      }
     }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const resetForm = () => {
+    submissionIdRef.current = crypto.randomUUID()
+    setForm(initialForm)
+    setStatus('idle')
+    setErrorMessage(null)
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setStatus('sent')
+    if (status === 'submitting') return
+
+    setStatus('submitting')
+    setErrorMessage(null)
+
+    try {
+      await submitMaestroEnquiry({
+        submission_id: submissionIdRef.current,
+        full_name: form.name.trim(),
+        organisation: form.organisation.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        enquiry_type: form.inquiry,
+        message: form.message.trim(),
+      })
+      setStatus('sent')
+    } catch (error) {
+      const message =
+        error instanceof EnquiryApiError
+          ? error.status === 429
+            ? contactFormCopy.rateLimited
+            : error.message || contactFormCopy.errorFallback
+          : contactFormCopy.errorFallback
+
+      setErrorMessage(message)
+      setStatus('error')
+    }
   }
 
   if (status === 'sent') {
@@ -32,23 +73,16 @@ export function ContactForm() {
         <span className="maestro-contact-form__success-icon" aria-hidden="true">
           <Icon name="check" weight="bold" />
         </span>
-        <h3 className="maestro-contact-form__success-title cursor-big">Message received</h3>
-        <p className="maestro-contact-form__success-text cursor-small">
-          Thank you. Our team will get back to you shortly to arrange a demonstration or answer your enquiry.
-        </p>
-        <button
-          type="button"
-          className="maestro-contact-form__reset cursor-small"
-          onClick={() => {
-            setForm(initialForm)
-            setStatus('idle')
-          }}
-        >
-          Send another message
+        <h3 className="maestro-contact-form__success-title cursor-big">{contactFormCopy.successTitle}</h3>
+        <p className="maestro-contact-form__success-text cursor-small">{contactFormCopy.successText}</p>
+        <button type="button" className="maestro-contact-form__reset cursor-small" onClick={resetForm}>
+          {contactFormCopy.resetLabel}
         </button>
       </div>
     )
   }
+
+  const isSubmitting = status === 'submitting'
 
   return (
     <form className="maestro-contact-form" onSubmit={handleSubmit} noValidate={false}>
@@ -60,6 +94,8 @@ export function ContactForm() {
             name="name"
             autoComplete="name"
             required
+            maxLength={200}
+            disabled={isSubmitting}
             value={form.name}
             onChange={handleChange('name')}
             placeholder="Jane Mensah"
@@ -72,6 +108,8 @@ export function ContactForm() {
             name="organisation"
             autoComplete="organization"
             required
+            maxLength={200}
+            disabled={isSubmitting}
             value={form.organisation}
             onChange={handleChange('organisation')}
             placeholder="Company name"
@@ -84,6 +122,8 @@ export function ContactForm() {
             name="email"
             autoComplete="email"
             required
+            maxLength={320}
+            disabled={isSubmitting}
             value={form.email}
             onChange={handleChange('email')}
             placeholder="you@company.com"
@@ -95,6 +135,9 @@ export function ContactForm() {
             type="tel"
             name="phone"
             autoComplete="tel"
+            required
+            maxLength={50}
+            disabled={isSubmitting}
             value={form.phone}
             onChange={handleChange('phone')}
             placeholder="+233"
@@ -102,7 +145,12 @@ export function ContactForm() {
         </label>
         <label className="maestro-contact-form__field maestro-contact-form__field--full">
           <span>How can we help?</span>
-          <select name="inquiry" value={form.inquiry} onChange={handleChange('inquiry')}>
+          <select
+            name="inquiry"
+            value={form.inquiry}
+            disabled={isSubmitting}
+            onChange={handleChange('inquiry')}
+          >
             {contactInquiryTypes.map((type) => (
               <option key={type.id} value={type.id}>
                 {type.label}
@@ -116,15 +164,24 @@ export function ContactForm() {
             name="message"
             rows={5}
             required
+            maxLength={5000}
+            disabled={isSubmitting}
             value={form.message}
             onChange={handleChange('message')}
             placeholder="Tell us about your operation and what you would like to see."
           />
         </label>
       </div>
-      <button type="submit" className="maestro-contact-form__submit cursor-small">
-        Send message
-        <Icon name="caret-right" weight="bold" />
+
+      {errorMessage && (
+        <p className="maestro-contact-form__error cursor-small" role="alert">
+          {errorMessage}
+        </p>
+      )}
+
+      <button type="submit" className="maestro-contact-form__submit cursor-small" disabled={isSubmitting}>
+        {isSubmitting ? contactFormCopy.submittingLabel : contactFormCopy.submitLabel}
+        {!isSubmitting && <Icon name="caret-right" weight="bold" />}
       </button>
     </form>
   )

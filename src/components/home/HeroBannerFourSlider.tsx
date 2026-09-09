@@ -19,12 +19,27 @@ export function HeroBannerFourSlider() {
     return () => cancelAnimationFrame(frame)
   }, [])
 
-  const goPrev = () => {
-    swiperRef.current?.slidePrev()
-  }
+  const changeSlide = (direction: 'prev' | 'next') => {
+    const swiper = swiperRef.current
+    if (!swiper || swiper.destroyed) return
 
-  const goNext = () => {
-    swiperRef.current?.slideNext()
+    const advance = () => {
+      if (direction === 'next') {
+        swiper.slideNext()
+      } else {
+        swiper.slidePrev()
+      }
+    }
+
+    // Fade + virtualTranslate can leave `animating` stuck, which makes the next
+    // click appear to do nothing. Snap the in-flight transition first.
+    if (swiper.animating) {
+      swiper.slideTo(swiper.activeIndex, 0, false)
+      requestAnimationFrame(advance)
+      return
+    }
+
+    advance()
   }
 
   return (
@@ -35,11 +50,13 @@ export function HeroBannerFourSlider() {
         <Swiper
           modules={[EffectFade, Autoplay]}
           className="banner-four-active"
-          speed={1500}
-          loop
+          speed={900}
+          rewind
           slidesPerView={1}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
           effect="fade"
+          fadeEffect={{ crossFade: true }}
+          allowTouchMove
           onSwiper={(instance) => {
             swiperRef.current = instance
           }}
@@ -89,12 +106,12 @@ export function HeroBannerFourSlider() {
           ))}
         </Swiper>
 
-        <div className="banner-four-arrow-box" aria-hidden={false}>
+        <div className="banner-four-arrow-box">
           <button
             className="banner-slider-prev"
             type="button"
             aria-label="Previous slide"
-            onClick={goPrev}
+            onClick={() => changeSlide('prev')}
           >
             <Icon name="arrow-left" className="banner-four-arrow-icon" />
           </button>
@@ -102,7 +119,7 @@ export function HeroBannerFourSlider() {
             className="banner-slider-next"
             type="button"
             aria-label="Next slide"
-            onClick={goNext}
+            onClick={() => changeSlide('next')}
           >
             <Icon name="arrow-right" className="banner-four-arrow-icon" />
           </button>
