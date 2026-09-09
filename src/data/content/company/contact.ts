@@ -15,11 +15,22 @@ export const contactPage = {
 }
 
 export const contactInquiryTypes = [
-  { id: 'demo', label: 'Request a Demo' },
-  { id: 'quote', label: 'Request a Quote' },
-  { id: 'team', label: 'Speak to Our Team' },
+  { id: 'request_demo', label: 'Request a Demo' },
+  { id: 'request_quote', label: 'Request a Quote' },
+  { id: 'speak_to_team', label: 'Speak to Our Team' },
   { id: 'support', label: 'Support' },
-]
+] as const
+
+export const contactFormCopy = {
+  submitLabel: 'Send message',
+  submittingLabel: 'Sending…',
+  successTitle: 'Message received',
+  successText:
+    'Thank you. Our team will get back to you shortly to arrange a demonstration or answer your enquiry.',
+  resetLabel: 'Send another message',
+  errorFallback: 'Something went wrong while sending your message. Please try again.',
+  rateLimited: 'Too many requests. Please wait a moment and try again.',
+}
 
 export const contactCards = [
   {

@@ -7,8 +7,8 @@ import type {
   FaqChatResponse,
 } from '../types/faqChat'
 
-const API_BASE_URL = import.meta.env.VITE_FAQ_CHAT_API_URL as string | undefined
-const BOT_SLUG = (import.meta.env.VITE_FAQ_CHAT_BOT as string | undefined) ?? 'maestro'
+const API_BASE_URL = import.meta.env.VITE_EMIT_API_URL as string | undefined
+const BOT_SLUG = (import.meta.env.VITE_EMIT_SITE as string | undefined) ?? 'maestro'
 
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
